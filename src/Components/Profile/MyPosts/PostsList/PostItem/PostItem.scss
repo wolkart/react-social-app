@@ -1,0 +1,17 @@
+.PostItem {
+  display: flex;
+  align-items: center;
+
+  &__ava {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
