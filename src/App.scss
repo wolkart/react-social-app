@@ -9,3 +9,22 @@
   width: calc(100% - 100px);
   max-width: 1280px;
 }
+
+.MainContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  margin-bottom: 15px;
+
+  &__inner {
+    display: flex;
+    flex: 1 0 auto;
+    margin: 0 auto;
+    width: calc(100% - 100px);
+    max-width: 1280px;
+  }
+
+  &__content {
+    flex: 0 1 auto;
+  }
+}

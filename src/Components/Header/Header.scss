@@ -4,5 +4,30 @@
   display: flex;
   align-items: center;
   text-align: center;
-  background-color: #c096d7;
+  box-shadow: 0 2px 5px 1px rgba(64, 60, 67, .16);
+
+  &__inner {
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+.Logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  &__image {
+    display: inline-block;
+    margin-right: 5px;
+    height: 50px;
+
+    img {
+      height: 100%;
+    }
+  }
+  
+  &__name {
+    color: #8f8f8f;
+    font-weight: bold;
+  }
 }

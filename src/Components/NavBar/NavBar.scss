@@ -1,7 +1,7 @@
 .NavBar {
   flex: 1 0 250px;
   max-width: 250px;
-  background-color: #c096d7;
+  box-shadow: 0 3px 5px 3px rgba(64, 60, 67, .16);
   margin-right: 15px;
 
   &__inner {

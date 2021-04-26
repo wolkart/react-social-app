@@ -1,3 +1,4 @@
+import React from 'react'
 import './NavBar.scss'
 import {Nav} from "./Nav/Nav";
 
