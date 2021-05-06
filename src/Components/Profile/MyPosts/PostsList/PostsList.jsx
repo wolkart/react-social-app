@@ -3,10 +3,14 @@ import './PostsList.scss'
 import {PostItem} from "./PostItem/PostItem";
 
 export const PostsList = () => {
-  return (
-      <div className="PostsList">
-        <PostItem message="Hi, how are you?" like={10}/>
-        <PostItem message={`My name is Artem!`} like={75}/>
-      </div>
-  )
+    let postsData = [
+        {id: 1, message: 'Hi, how are you?', like: 10},
+        {id: 2, message: 'My name is Artem!', like: 87}
+    ]
+
+    return (
+        <div className="PostsList">
+            {postsData.map(post => <PostItem message={post.message} like={post.like}/>)}
+        </div>
+    )
 }
