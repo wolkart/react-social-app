@@ -2,7 +2,7 @@ import React from 'react'
 import './MyPosts.scss'
 import {PostsList} from "./PostsList/PostsList";
 
-export const MyPosts = () => {
+export const MyPosts = (props) => {
   return (
     <div className="MyPosts">
       <div className="MyPosts__header">My posts</div>
@@ -10,7 +10,7 @@ export const MyPosts = () => {
         <textarea ></textarea>
         <button>Add post</button>
       </div>
-      <PostsList/>
+      <PostsList state={props.state}/>
     </div>
   )
 }

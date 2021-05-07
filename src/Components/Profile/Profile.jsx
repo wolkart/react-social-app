@@ -4,12 +4,12 @@ import {MyPosts} from "./MyPosts/MyPosts";
 import {Wallpaper} from "./Wallpaper/Wallpaper";
 import {UserInfo} from "./UserInfo/UserInfo";
 
-export const Profile = () => {
+export const Profile = (props) => {
     return (
         <div className="Profile">
             <Wallpaper/>
             <UserInfo/>
-            <MyPosts/>
+            <MyPosts state={props.state}/>
         </div>
     )
 }
