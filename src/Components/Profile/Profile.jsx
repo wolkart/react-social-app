@@ -9,7 +9,7 @@ export const Profile = (props) => {
         <div className="Profile">
             <Wallpaper/>
             <UserInfo/>
-            <MyPosts state={props.state}/>
+            <MyPosts state={props.state} addPost={props.addPost}/>
         </div>
     )
 }

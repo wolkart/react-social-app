@@ -3,3 +3,14 @@
     margin-bottom: 15px;
   }
 }
+
+.AddPost {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  textarea {
+    height: 70px;
+    margin-bottom: 10px;
+  }
+}
