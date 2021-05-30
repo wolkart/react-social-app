@@ -5,11 +5,15 @@ import {Wallpaper} from "./Wallpaper/Wallpaper";
 import {UserInfo} from "./UserInfo/UserInfo";
 
 export const Profile = (props) => {
-    return (
-        <div className="Profile">
-            <Wallpaper/>
-            <UserInfo/>
-            <MyPosts state={props.state} addPost={props.addPost}/>
-        </div>
-    )
+  return (
+    <div className="Profile">
+      <Wallpaper/>
+      <UserInfo/>
+      <MyPosts
+        profilePage={props.profilePage}
+        updateNewTextPost={props.updateNewTextPost}
+        addPost={props.addPost}
+      />
+    </div>
+  )
 }

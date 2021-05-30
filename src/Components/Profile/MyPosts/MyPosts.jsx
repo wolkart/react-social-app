@@ -5,20 +5,19 @@ import {PostsList} from "./PostsList/PostsList";
 export const MyPosts = (props) => {
   const newPostElem = React.createRef()
 
-  const addPost = () => {
+  const updateTextPost = () => {
     let text = newPostElem.current.value
-
-    props.addPost(text)
+    props.updateNewTextPost(text)
   }
 
   return (
       <div className="MyPosts">
         <div className="MyPosts__header">My posts</div>
         <div className='AddPost'>
-          <textarea ref={newPostElem}></textarea>
-          <button onClick={addPost}>Add post</button>
+          <textarea ref={newPostElem} onChange={updateTextPost} value={props.profilePage.textPost} />
+          <button onClick={props.addPost}>Add post</button>
         </div>
-        <PostsList state={props.state}/>
+        <PostsList profilePage={props.profilePage}/>
       </div>
   )
 }

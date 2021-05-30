@@ -1,3 +1,5 @@
+import {rerenderTree} from "../render";
+
 const state = {
   dialogsPage: {
     dialogs: [
@@ -24,6 +26,7 @@ const state = {
     ]
   },
   profilePage: {
+    textPost: 'Default text',
     posts: [
       {id: 1, message: 'Hi, how are you?', like: 10},
       {id: 2, message: 'My name is Artem!', like: 87}
@@ -31,14 +34,24 @@ const state = {
   }
 }
 
-export const addPost = (postMessage) => {
+export const addPost = () => {
   const post = {
     id: 5,
-    message: postMessage,
+    message: state.profilePage.textPost,
     like: 0
   }
 
   state.profilePage.posts.push(post)
+
+  state.profilePage.textPost = ''
+
+  rerenderTree(state)
+}
+
+export const updateNewTextPost = (newText) => {
+  state.profilePage.textPost = newText
+
+  rerenderTree(state)
 }
 
 export default state
