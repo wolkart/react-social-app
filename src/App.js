@@ -11,23 +11,26 @@ import {Music} from "./Components/Music/Music";
 
 const App = (props) => {
   return (
-      <div className="App">
-        <Header/>
-        <div className="MainContainer">
-          <div className="MainContainer__inner">
-            <NavBar/>
-            <div className="MainContainer__content">
-              <Route path='/profile' render={() => <Profile
-                profilePage={props.state.profilePage}
-                dispatch={props.dispatch}/>}/>
-              <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>
-              <Route path='/news' render={() => <News/>}/>
-              <Route path='/music' render={() => <Music/>}/>
-            </div>
+    <div className="App">
+      <Header/>
+      <div className="MainContainer">
+        <div className="MainContainer__inner">
+          <NavBar/>
+          <div className="MainContainer__content">
+            <Route path='/profile' render={() => <Profile
+              profilePage={props.state.profilePage}
+              dispatch={props.dispatch}/>}/>
+            <Route path='/dialogs' render={() => <Dialogs
+              state={props.state.dialogsPage}
+              dispatch={props.dispatch}
+            />}/>
+            <Route path='/news' render={() => <News/>}/>
+            <Route path='/music' render={() => <Music/>}/>
           </div>
         </div>
-        <Footer/>
       </div>
+      <Footer/>
+    </div>
   );
 }
 

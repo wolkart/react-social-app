@@ -1,5 +1,7 @@
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
 const ADD_POST = 'ADD-POST'
+const ADD_MESSAGE = 'ADD-MESSAGE'
 
 let store = {
   _state: {
@@ -21,6 +23,7 @@ let store = {
           photo: 'https://99px.ru/sstorage/56/2019/11/image_561311190659479643839.jpg'
         }
       ],
+      textMessage: 'Default message text',
       messages: [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'What is your name?'},
@@ -47,7 +50,7 @@ let store = {
   dispatch(action) {
     if (action.type === ADD_POST) {
       const post = {
-        id: 5,
+        id: 3,
         message: this._state.profilePage.textPost,
         like: 0
       }
@@ -58,6 +61,17 @@ let store = {
 
     } else if (action.type === UPDATE_NEW_POST_TEXT) {
       this._state.profilePage.textPost = action.newText
+      this._callSubscriber(this._state)
+    } else if (action.type === ADD_MESSAGE) {
+      const message = {
+        id: 4,
+        message: this._state.dialogsPage.textMessage
+      }
+      this._state.dialogsPage.messages.push(message)
+      this._state.dialogsPage.textMessage = ''
+      this._callSubscriber(this._state)
+    } else if (action.type === UPDATE_MESSAGE_TEXT) {
+      this._state.dialogsPage.textMessage = action.newText
       this._callSubscriber(this._state)
     }
   }
@@ -70,6 +84,14 @@ export const updateTextPostActionCreator = (text) => {
   }
 }
 
+export const updateTextMessageActionCreator = (text) => {
+  return {
+    type: UPDATE_MESSAGE_TEXT,
+    newText: text
+  }
+}
+
 export const addPostActionCreator = () => ({type: ADD_POST})
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
 
 export default store
