@@ -1,7 +1,7 @@
 import React from 'react'
 import './MyPosts.scss'
 import {PostsList} from "./PostsList/PostsList";
-import {addPostActionCreator, updateTextPostActionCreator} from "../../../redux/state";
+import {addPostActionCreator, updateTextPostActionCreator} from "../../../redux/postReducer";
 
 export const MyPosts = (props) => {
   const newPostElem = React.createRef()

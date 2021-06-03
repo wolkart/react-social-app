@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './Dialogs.module.css'
 import {DialogItem} from "./DilogsItem/DialogItem";
 import {Message} from "./Message/Message";
-import {addMessageActionCreator, updateTextMessageActionCreator} from "../../redux/state";
+import {addMessageActionCreator, updateTextMessageActionCreator} from "../../redux/dialogsReducer";
 
 export const Dialogs = (props) => {
   const dialogItems = props.state.dialogs.map((dialog, i) => <DialogItem key={i} name={dialog.name} id={dialog.id}
