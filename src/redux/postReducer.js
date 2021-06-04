@@ -1,7 +1,15 @@
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const ADD_POST = 'ADD-POST'
 
-const postReducer = (state, action) => {
+const initialState = {
+  textPost: 'Default text',
+  posts: [
+    {id: 1, message: 'Hi, how are you?', like: 10},
+    {id: 2, message: 'My name is Artem!', like: 87}
+  ]
+}
+
+const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
       const post = {
