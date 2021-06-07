@@ -6,7 +6,7 @@ export const PostsList = (props) => {
     return (
         <div className="PostsList">
             {
-                props.profilePage.posts.map((post, i) => <PostItem key={i} message={post.message} like={post.like}/>)
+                props.posts.map((post, i) => <PostItem key={i} message={post.message} like={post.like}/>)
             }
         </div>
     )

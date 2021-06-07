@@ -1,18 +1,15 @@
 import React from 'react'
 import './Profile.scss'
-import {MyPosts} from "./MyPosts/MyPosts";
 import {Wallpaper} from "./Wallpaper/Wallpaper";
 import {UserInfo} from "./UserInfo/UserInfo";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 export const Profile = (props) => {
   return (
     <div className="Profile">
       <Wallpaper/>
       <UserInfo/>
-      <MyPosts
-        profilePage={props.profilePage}
-        dispatch={props.dispatch}
-      />
+      <MyPostsContainer store={props.store}/>
     </div>
   )
 }

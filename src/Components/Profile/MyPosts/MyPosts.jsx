@@ -1,29 +1,26 @@
 import React from 'react'
 import './MyPosts.scss'
 import {PostsList} from "./PostsList/PostsList";
-import {addPostActionCreator, updateTextPostActionCreator} from "../../../redux/postReducer";
 
 export const MyPosts = (props) => {
-  const newPostElem = React.createRef()
-
   const addPost = () => {
-    props.dispatch(addPostActionCreator())
+    props.onAddPost()
   }
 
-  const updateTextPost = () => {
-    let text = newPostElem.current.value
+  const updateTextPost = (e) => {
+    let text = e.target.value
 
-    props.dispatch(updateTextPostActionCreator(text))
+    props.onUpdateTextPost(text)
   }
 
   return (
       <div className="MyPosts">
         <div className="MyPosts__header">My posts</div>
         <div className='AddPost'>
-          <textarea ref={newPostElem} onChange={updateTextPost} value={props.profilePage.textPost} />
+          <textarea onChange={updateTextPost} value={props.postText} />
           <button onClick={addPost}>Add post</button>
         </div>
-        <PostsList profilePage={props.profilePage}/>
+        <PostsList posts={props.posts}/>
       </div>
   )
 }
