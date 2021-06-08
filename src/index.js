@@ -5,22 +5,17 @@ import App from './App';
 import store from "./redux/store-redux";
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
 
-const rerenderTree = (state) => {
-  ReactDOM.render(
+ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
-        <App store={store}/>
+        <Provider store={store}>
+          <App/>
+        </Provider>
       </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')
-  );
-}
-
-rerenderTree(store.getState())
-
-store.subscribe(() => {
-    rerenderTree(store.getState())
-})
+);
 
 reportWebVitals();

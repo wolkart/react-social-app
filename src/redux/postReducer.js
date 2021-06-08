@@ -10,20 +10,27 @@ const initialState = {
 }
 
 const postReducer = (state = initialState, action) => {
+
+  let stateCopy = {
+    ...state,
+    posts: [...state.posts]
+  }
+
   switch (action.type) {
-    case ADD_POST:
+    case ADD_POST: {
       const post = {
         id: 3,
         message: state.textPost,
         like: 0
       }
-
-      state.posts.push(post)
-      state.textPost = ''
-      return state
-    case UPDATE_NEW_POST_TEXT:
-      state.textPost = action.newText
-      return state
+      stateCopy.posts.push(post)
+      stateCopy.textPost = ''
+      return stateCopy
+    }
+    case UPDATE_NEW_POST_TEXT: {
+      stateCopy.textPost = action.newText
+      return stateCopy
+    }
     default:
       return state
   }

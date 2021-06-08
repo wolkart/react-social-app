@@ -9,4 +9,6 @@ const rootReducer = combineReducers({
 
 const sture = createStore(rootReducer)
 
+window.store = sture
+
 export default sture

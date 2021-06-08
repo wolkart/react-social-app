@@ -9,7 +9,7 @@ export const Profile = (props) => {
     <div className="Profile">
       <Wallpaper/>
       <UserInfo/>
-      <MyPostsContainer store={props.store}/>
+      <MyPostsContainer/>
     </div>
   )
 }
