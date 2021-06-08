@@ -14,13 +14,16 @@ export const MyPosts = (props) => {
   }
 
   return (
-      <div className="MyPosts">
-        <div className="MyPosts__header">My posts</div>
-        <div className='AddPost'>
-          <textarea onChange={updateTextPost} value={props.postText} />
-          <button onClick={addPost}>Add post</button>
-        </div>
-        <PostsList posts={props.posts}/>
+    <div className="MyPosts">
+      <div className="MyPosts__header">My posts</div>
+      <div className='AddPost'>
+          <textarea
+            onChange={updateTextPost}
+            value={props.postText}
+          />
+        <button onClick={addPost}>Add post</button>
       </div>
+      <PostsList posts={props.posts}/>
+    </div>
   )
 }
