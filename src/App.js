@@ -5,9 +5,9 @@ import {Footer} from "./Components/Footer/Footer";
 import {NavBar} from "./Components/NavBar/NavBar";
 import {Profile} from "./Components/Profile/Profile";
 import {Route} from "react-router-dom";
-import {Users} from "./Components/Users/Users";
 import {Music} from "./Components/Music/Music";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
+import {UsersContainer} from "./Components/Users/UsersContainer";
 
 const App = (props) => {
   return (
@@ -27,7 +27,7 @@ const App = (props) => {
             />
             <Route
               path='/users'
-              render={() => <Users/>}
+              render={() => <UsersContainer/>}
             />
             <Route
               path='/music'

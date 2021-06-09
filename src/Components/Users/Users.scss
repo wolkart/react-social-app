@@ -1,1 +1,18 @@
-.Users {}
+.Users {
+  &__heading {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+}
+
+.User {
+  &__inner {
+    display: flex;
+  }
+
+  &__location {
+    display: flex;
+    flex-direction: column;
+  }
+}
