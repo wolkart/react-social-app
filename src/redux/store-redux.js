@@ -9,8 +9,8 @@ const rootReducer = combineReducers({
     usersPage: usersReducer
 })
 
-const sture = createStore(rootReducer)
+const store = createStore(rootReducer)
 
-window.store = sture
+window.store = store
 
-export default sture
+export default store

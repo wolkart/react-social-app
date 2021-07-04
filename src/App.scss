@@ -28,3 +28,25 @@
     width: 100%;
   }
 }
+
+.Pagination {
+  display: flex;
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #8f8f8f;
+    border-radius: 50%;
+    margin-right: 10px;
+    font-size: 16px;
+    line-height: 0;
+    color: #8f8f8f;
+    
+    &.active {
+      font-weight: bold;
+      color: #61dbfb;
+    }
+  }
+}
