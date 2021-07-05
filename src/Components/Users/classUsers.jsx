@@ -8,6 +8,15 @@ export class Users extends React.Component {
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
       .then(response => {
         this.props.setUsers(response.data.items)
+        this.props.setTotalUsersCount(response.data.totalCount)
+      })
+  }
+
+  onPageChanged = (pageNumber) => {
+    this.props.setCurrentPage(pageNumber)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+      .then(response => {
+        this.props.setUsers(response.data.items)
       })
   }
 
@@ -25,26 +34,14 @@ export class Users extends React.Component {
         <div className="Pagination">
           {pages.map((page, i) => {
             return (
-              <div key={i} className={this.props.currentPage === page ? "Pagination__item active" : "Pagination__item"}>
+              <div key={i}
+                   className={this.props.currentPage === page ? "Pagination__item active" : "Pagination__item"}
+                   onClick={() => this.onPageChanged(page)}
+              >
                 <span>{page}</span>
               </div>
             )
           })}
-          {/*<div className="Pagination__item">*/}
-          {/*  <span>1</span>*/}
-          {/*</div>*/}
-          {/*<div className="Pagination__item active">*/}
-          {/*  <span>2</span>*/}
-          {/*</div>*/}
-          {/*<div className="Pagination__item">*/}
-          {/*  <span>3</span>*/}
-          {/*</div>*/}
-          {/*<div className="Pagination__item">*/}
-          {/*  <span>4</span>*/}
-          {/*</div>*/}
-          {/*<div className="Pagination__item">*/}
-          {/*  <span>5</span>*/}
-          {/*</div>*/}
         </div>
         <div className="Users__list">
           {
