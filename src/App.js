@@ -7,7 +7,7 @@ import {Profile} from "./Components/Profile/Profile";
 import {Route} from "react-router-dom";
 import {Music} from "./Components/Music/Music";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
-import {UsersContainer} from "./Components/Users/UsersContainer";
+import UsersContainer from "./Components/Users/UsersContainer";
 
 const App = (props) => {
   return (

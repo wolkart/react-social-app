@@ -4,19 +4,28 @@ import * as axios from "axios";
 import userStub from '../../assets/images/wolf.png'
 
 export const Users = (props) => {
-  const getUsers = () => {
-    if (props.users.length === 0) {
-      axios.get('https://social-network.samuraijs.com/api/1.0/users')
-        .then(response => {
-          props.setUsers(response.data.items)
-        })
-    }
+  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+  let pages = []
+
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i)
   }
 
   return (
     <div className="Users">
       <div className="Users__heading">Users</div>
-      <button className="User__button" onClick={getUsers}>Get users</button>
+      <div className="Pagination">
+        {pages.map((page, i) => {
+          return (
+            <div key={i}
+                 className={props.currentPage === page ? "Pagination__item active" : "Pagination__item"}
+                 onClick={() => props.onPageChanged(page)}
+            >
+              <span>{page}</span>
+            </div>
+          )
+        })}
+      </div>
       <div className="Users__list">
         {
           props.users.map(user => {
@@ -28,12 +37,9 @@ export const Users = (props) => {
                   </div>
                   {
                     user.followed
-                      ? <button onClick={() =>
-                        props.unfollow(user.id)
-                      } className="User__button">Unfollow</button>
-                      : <button onClick={() =>
-                        props.follow(user.id)
-                      } className="User__button">Follow</button>
+                      ?
+                      <button onClick={() => props.unfollow(user.id)} className="User__button">Unfollow</button>
+                      : <button onClick={() => props.follow(user.id)} className="User__button">Follow</button>
                   }
                 </div>
                 <div className="User__info">
