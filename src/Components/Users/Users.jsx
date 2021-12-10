@@ -1,7 +1,7 @@
 import React from 'react'
 import './Users.scss'
-import * as axios from "axios";
-import userStub from '../../assets/images/wolf.png'
+import userStub from '../../assets/images/ava-stub.jpg'
+import {NavLink} from "react-router-dom";
 
 export const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -33,7 +33,9 @@ export const Users = (props) => {
               <div className="User" key={user.id}>
                 <div className="User__person">
                   <div className="User__photo">
-                    <img src={user.photos.small != null ? user.photos.small : userStub} alt={user.name}/>
+                    <NavLink to={`/profile/${user.id}`}>
+                      <img src={user.photos.small != null ? user.photos.small : userStub} alt={user.name}/>
+                    </NavLink>
                   </div>
                   {
                     user.followed

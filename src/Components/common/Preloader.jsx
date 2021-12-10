@@ -1,5 +1,5 @@
 import React from "react";
-import usersPreloader from "../../assets/images/UserLoader.gif";
+import usersPreloader from "../../assets/images/Glossy-Preloader.svg";
 import './Preloader.scss'
 
 export const Preloader = (props) => {

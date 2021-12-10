@@ -8,6 +8,7 @@ import {Route} from "react-router-dom";
 import {Music} from "./Components/Music/Music";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
+import ProfileContainer from "./Components/Profile/ProfileContainer";
 
 const App = (props) => {
   return (
@@ -19,7 +20,7 @@ const App = (props) => {
           <div className="MainContainer__content">
             <Route
               path='/profile'
-              render={() => <Profile/>}
+              render={() => <ProfileContainer/>}
             />
             <Route
               path='/dialogs'
