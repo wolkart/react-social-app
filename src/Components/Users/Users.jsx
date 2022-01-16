@@ -2,6 +2,7 @@ import React from 'react'
 import './Users.scss'
 import userStub from '../../assets/images/ava-stub.jpg'
 import {NavLink} from "react-router-dom";
+import * as axios from "axios";
 
 export const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -40,8 +41,32 @@ export const Users = (props) => {
                   {
                     user.followed
                       ?
-                      <button onClick={() => props.unfollow(user.id)} className="User__button">Unfollow</button>
-                      : <button onClick={() => props.follow(user.id)} className="User__button">Follow</button>
+                      <button onClick={() => {
+                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
+                          withCredentials: true,
+                          headers: {
+                            'API-KEY': 'ccee2fb7-4271-468b-bff1-b5597f7aa817'
+                          }
+                        })
+                          .then(response => {
+                            if (response.data.resultCode === 0) {
+                              props.unfollow(user.id)
+                            }
+                          })
+                      }} className="User__button">Unfollow</button>
+                      : <button onClick={() => {
+                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
+                          withCredentials: true,
+                          headers: {
+                            'API-KEY': 'ccee2fb7-4271-468b-bff1-b5597f7aa817'
+                          }
+                        })
+                          .then(response => {
+                            if (response.data.resultCode === 0) {
+                              props.follow(user.id)
+                            }
+                          })
+                      }} className="User__button">Follow</button>
                   }
                 </div>
                 <div className="User__info">
