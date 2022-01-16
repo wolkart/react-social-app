@@ -9,17 +9,18 @@ import {Music} from "./Components/Music/Music";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
+import HeaderContainer from "./Components/Header/HeaderContainer";
 
 const App = (props) => {
   return (
     <div className="App">
-      <Header/>
+      <HeaderContainer/>
       <div className="MainContainer">
         <div className="MainContainer__inner">
           <NavBar/>
           <div className="MainContainer__content">
             <Route
-              path='/profile'
+              path='/profile/:userId?'
               render={() => <ProfileContainer/>}
             />
             <Route
