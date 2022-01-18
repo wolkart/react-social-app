@@ -48,6 +48,11 @@
     color: #8f8f8f;
     font-size: 16px;
     height: 30px;
+
+    &:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
   }
 
   &__info {
