@@ -4,7 +4,7 @@ import {Footer} from "./Components/Footer/Footer";
 import {NavBar} from "./Components/NavBar/NavBar";
 import {Route} from "react-router-dom";
 import {Music} from "./Components/Music/Music";
-import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
+import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
