@@ -27,22 +27,30 @@ export class ProfileStatus extends React.Component {
     })
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.status != this.props.status) {
+      this.setState({
+        status: this.props.status
+      })
+    }
+  }
+
 
   render() {
     return (
       <div className="ProfileStatus">
         {!this.state.editMode &&
-        <span onClick={this.activeEditMode} className="ProfileStatus__text">{this.props.status}</span>
+        <span onClick={this.activeEditMode} className="ProfileStatus__text">{this.props.status || "Edit status"}</span>
         }
 
         {this.state.editMode &&
-          <div className="ProfileStatus__input">
+        <div className="ProfileStatus__input">
           <input onChange={this.onStatusChange}
                  autoFocus={true}
                  onBlur={this.deactiveEditMode}
                  type="text"
                  value={this.state.status}
-            />
+          />
         </div>}
       </div>
     )
