@@ -14,7 +14,10 @@ export const ProfileInfo = (props) => {
       </div>
       <div className="ProfileInfo__description">
         <div className="ProfileInfo__name">{props.profile.fullName}</div>
-        <ProfileStatus/>
+        <ProfileStatus
+            status={props.status}
+            updateStatus={props.updateStatus}
+        />
         <div className="ProfileInfo__about">
           <span className="ProfileInfo__about-label">О себе:</span>
           <span className="ProfileInfo__about-text">{props.profile.aboutMe}</span>

@@ -4,7 +4,7 @@ import './ProfileStatus.scss'
 export class ProfileStatus extends React.Component {
   state = {
     editMode: false,
-    status: 'Snap'
+    status: this.props.status
   }
 
   activeEditMode = () => {
@@ -17,11 +17,13 @@ export class ProfileStatus extends React.Component {
     this.setState({
       editMode: false
     })
+
+    this.props.updateStatus(this.state.status)
   }
 
-  editStatus = (event) => {
+  onStatusChange = (event) => {
     this.setState({
-      status: event.target.value
+      status: event.currentTarget.value
     })
   }
 
@@ -30,12 +32,12 @@ export class ProfileStatus extends React.Component {
     return (
       <div className="ProfileStatus">
         {!this.state.editMode &&
-        <span onClick={this.activeEditMode} className="ProfileStatus__text">{this.state.status}</span>
+        <span onClick={this.activeEditMode} className="ProfileStatus__text">{this.props.status}</span>
         }
 
         {this.state.editMode &&
           <div className="ProfileStatus__input">
-          <input onChange={this.editStatus}
+          <input onChange={this.onStatusChange}
                  autoFocus={true}
                  onBlur={this.deactiveEditMode}
                  type="text"
