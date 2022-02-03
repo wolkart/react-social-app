@@ -1,5 +1,5 @@
 const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
-const ADD_MESSAGE = 'ADD-MESSAGE'
+const SEND_MESSAGE = 'ADD-SEND_MESSAGE'
 
 const initialState = {
   dialogs: [
@@ -19,7 +19,6 @@ const initialState = {
       photo: 'https://99px.ru/sstorage/56/2019/11/image_561311190659479643839.jpg'
     }
   ],
-  textMessage: 'Default message text',
   messages: [
     {id: 1, message: 'Hi'},
     {id: 2, message: 'What is your name?'},
@@ -29,21 +28,16 @@ const initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_MESSAGE: {
-      const message = {
-        id: 4,
-        message: state.textMessage
-      }
+    case SEND_MESSAGE: {
       return {
         ...state,
-        messages: [...state.messages, message],
-        textMessage: ''
-      }
-    }
-    case UPDATE_MESSAGE_TEXT: {
-      return {
-        ...state,
-        textMessage: action.newText
+        messages: [
+          ...state.messages,
+          {
+            id: 4,
+            message: action.newMessageBody
+          }
+        ]
       }
     }
     default:
@@ -51,12 +45,6 @@ const dialogsReducer = (state = initialState, action) => {
   }
 }
 
-export const updateTextMessageActionCreator = (text) => {
-  return {
-    type: UPDATE_MESSAGE_TEXT,
-    newText: text
-  }
-}
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
+export const sendMessage = (newMessageBody) => ({type: SEND_MESSAGE, newMessageBody})
 
 export default dialogsReducer

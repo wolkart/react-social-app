@@ -2,23 +2,18 @@ import React from 'react'
 import classes from './Dialogs.module.css'
 import {DialogItem} from "./DilogsItem/DialogItem";
 import {Message} from "./Message/Message";
-import {Redirect} from "react-router-dom";
+import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../common/Forms/FormsControls";
+import {maxLength, required} from "../../utils/validators/validators";
 
 export const Dialogs = (props) => {
   const dialogItems = props.dialogsPage.dialogs.map((dialog, i) => <DialogItem key={i} name={dialog.name} id={dialog.id}
-                                                                         photo={dialog.photo}/>)
+                                                                               photo={dialog.photo}/>)
   const messageItems = props.dialogsPage.messages.map((message, i) => <Message key={i} message={message.message}/>)
 
-  const updateMessageText = (e) => {
-    const text = e.target.value
-    props.onUpdateMessageText(text)
+  const addNewMessage = (values) => {
+    props.sendMessage(values.newMessageBody)
   }
-
-  const addMessage = () => {
-    props.onAddMessage()
-  }
-
-  if (!props.isAuth) return <Redirect to='/login'/>
 
   return (
     <div className={classes.Dialogs}>
@@ -32,9 +27,28 @@ export const Dialogs = (props) => {
         </div>
       </div>
       <div className={classes.AddMessage}>
-        <textarea onChange={updateMessageText} value={props.dialogsPage.textMessage}/>
-        <button onClick={addMessage}>Add message</button>
+        <AddMessageFormRedux
+          onSubmit={addNewMessage}
+        />
       </div>
     </div>
   )
 }
+
+const maxLength100 = maxLength(100)
+
+const AddMessageForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <Field
+        component={Textarea}
+        name='newMessageBody'
+        placeholder='Enter new message'
+        validate={[required, maxLength100]}
+      />
+      <button>Add message</button>
+    </form>
+  )
+}
+
+const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm)

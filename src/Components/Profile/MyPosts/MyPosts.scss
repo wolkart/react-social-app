@@ -9,8 +9,11 @@
   flex-direction: column;
   align-items: flex-start;
 
+  .FormControl {
+    margin-bottom: 10px;
+  }
+
   textarea {
     height: 70px;
-    margin-bottom: 10px;
   }
 }
