@@ -10,7 +10,7 @@ import {compose} from "redux";
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if (!userId) userId = this.props.userId
+        if (!userId) userId = this.props.authorizedUserId
 
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
@@ -32,7 +32,7 @@ const mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
-        userId: state.auth.userId
+        authorizedUserId: state.auth.userId
     }
 }
 
