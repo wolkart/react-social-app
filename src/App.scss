@@ -31,11 +31,12 @@
 
 .Pagination {
   display: flex;
+  overflow: auto;
   &__item {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30px;
+    flex: 0 0 30px;
     height: 30px;
     border: 1px solid #8f8f8f;
     border-radius: 50%;
