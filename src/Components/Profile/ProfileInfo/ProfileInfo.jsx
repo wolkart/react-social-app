@@ -3,6 +3,7 @@ import {Preloader} from "../../common/Preloader";
 import './ProfileInfo.scss'
 import {ProfileAva} from "./ProfileAva";
 import {ProfileStatus} from "./ProfileStatus";
+import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 
 export const ProfileInfo = (props) => {
   if (!props.profile) return <Preloader/>
@@ -14,7 +15,7 @@ export const ProfileInfo = (props) => {
       </div>
       <div className="ProfileInfo__description">
         <div className="ProfileInfo__name">{props.profile.fullName}</div>
-        <ProfileStatus
+        <ProfileStatusWithHooks
             status={props.status}
             updateStatus={props.updateStatus}
         />
