@@ -2,16 +2,19 @@ import React from "react";
 import {Preloader} from "../../common/Preloader";
 import './ProfileInfo.scss'
 import {ProfileAva} from "./ProfileAva";
-import {ProfileStatus} from "./ProfileStatus";
 import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 
-export const ProfileInfo = ({profile, status, updateStatus}) => {
+export const ProfileInfo = ({profile, status, updateStatus, isOwner, changePhoto}) => {
   if (!profile) return <Preloader/>
 
   return (
     <div className='ProfileInfo'>
       <div className="ProfileInfo__ava">
-        <ProfileAva image={profile.photos.large}/>
+        <ProfileAva
+          image={profile.photos.large}
+          isOwner={isOwner}
+          changePhoto={changePhoto}
+        />
       </div>
       <div className="ProfileInfo__description">
         <div className="ProfileInfo__name">{profile.fullName}</div>

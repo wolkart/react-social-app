@@ -1,12 +1,9 @@
-import React, {Suspense} from 'react'
+import React, {Suspense} from 'react';
 import './App.scss';
 import {Footer} from "./Components/Footer/Footer";
 import {NavBar} from "./Components/NavBar/NavBar";
 import {BrowserRouter, Route, Switch, withRouter} from "react-router-dom";
 import {Music} from "./Components/Music/Music";
-// import DialogsContainer from "./Components/Dialogs/DialogsContainer";
-// import ProfileContainer from "./Components/Profile/ProfileContainer";
-// import UsersContainer from "./Components/Users/UsersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
 import {connect, Provider} from "react-redux";
