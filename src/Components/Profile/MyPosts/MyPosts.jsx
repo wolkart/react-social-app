@@ -7,22 +7,6 @@ import {Textarea} from "../../common/Forms/FormsControls";
 
 const maxLength10 = maxLength(10)
 
-export const MyPosts = (props) => {
-  const onAddPost = (values) => {
-    props.addNewPost(values.newPost)
-  }
-
-  return (
-    <div className="MyPosts">
-      <div className="MyPosts__header">My posts</div>
-      <div className='AddPost'>
-          <AddPostFormRedux onSubmit={onAddPost}/>
-      </div>
-      <PostsList posts={props.posts}/>
-    </div>
-  )
-}
-
 const AddPostForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
@@ -39,3 +23,18 @@ const AddPostForm = (props) => {
 
 const AddPostFormRedux = reduxForm({form: 'newPostForm'})(AddPostForm)
 
+export const MyPosts = React.memo(props => {
+  const onAddPost = (values) => {
+    props.addNewPost(values.newPost)
+  }
+
+  return (
+    <div className="MyPosts">
+      <div className="MyPosts__header">My posts</div>
+      <div className='AddPost'>
+        <AddPostFormRedux onSubmit={onAddPost}/>
+      </div>
+      <PostsList posts={props.posts}/>
+    </div>
+  )
+})

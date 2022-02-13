@@ -1,42 +1,19 @@
 import React from "react";
 import {Field, reduxForm} from "redux-form";
-import {Input} from "../common/Forms/FormsControls";
+import {CreateField, Input} from "../common/Forms/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/authReducer";
 import {Redirect} from "react-router-dom";
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
   return (
-    <form onSubmit={props.handleSubmit}>
-      <div>
-        <Field
-          placeholder={'Email'}
-          name={'email'}
-          component={Input}
-          validate={[required]}
-        />
-      </div>
-      <div>
-        <Field
-          placeholder={'Password'}
-          name={'password'}
-          component={Input}
-          validate={[required]}
-          type={'password'}
-        />
-      </div>
-      <div>
-        <Field
-          type={"checkbox"}
-          name={'rememberMe'}
-          component={Input}
-          validate={[required]}
-        />
-        remember me
-      </div>
-      {props.error && <div className="FormSummaryError">
-        {props.error}
+    <form onSubmit={handleSubmit}>
+      {CreateField('Email', 'email', Input, [required])}
+      {CreateField('Password', 'password', Input, [required], {type: 'password'})}
+      {CreateField(null, 'rememberMe', Input, [], {type: 'checkbox'}, 'remember me')}
+      {error && <div className="FormSummaryError">
+        {error}
       </div>}
       <div>
         <button type={"submit"}>
@@ -49,14 +26,12 @@ const LoginForm = (props) => {
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
-const Login = (props) => {
+const Login = ({login, isAuth}) => {
   const onSubmit = (formData) => {
-    props.login(formData.email, formData.password, formData.rememberMe)
+    login(formData.email, formData.password, formData.rememberMe)
   }
 
-  console.log(props)
-
-  if (props.isAuth) {
+  if (isAuth) {
     return <Redirect to={'/profile'}/>
   }
 
