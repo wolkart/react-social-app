@@ -1,0 +1,17 @@
+.ProfileInfoForm {
+  display: flex;
+  flex-direction: column;
+
+  &__field {
+    margin-bottom: 20px;
+  }
+
+  &__label {
+    margin-bottom: 5px;
+  }
+
+  &__button {
+    cursor: pointer;
+    margin-top: 5px;
+  }
+}

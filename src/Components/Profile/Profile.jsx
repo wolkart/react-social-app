@@ -4,7 +4,7 @@ import {Wallpaper} from "./Wallpaper/Wallpaper";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
-export const Profile = ({profile, status, updateStatus, isOwner, changePhoto}) => {
+export const Profile = ({profile, status, updateStatus, isOwner, changePhoto, saveProfile}) => {
   return (
     <div className="Profile">
       <Wallpaper/>
@@ -14,6 +14,7 @@ export const Profile = ({profile, status, updateStatus, isOwner, changePhoto}) =
         updateStatus={updateStatus}
         isOwner={isOwner}
         changePhoto={changePhoto}
+        saveProfile={saveProfile}
       />
       <MyPostsContainer/>
     </div>
