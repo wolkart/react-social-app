@@ -14,7 +14,7 @@ import store from "./redux/store-redux";
 
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'))
-const UsersContainer = React.lazy(() => import('./Components/Users/UsersContainer'))
+const UsersContainer = React.lazy(() => import('./Components/Users/UsersContainer.tsx'))
 
 class App extends React.Component {
   componentDidMount() {
@@ -43,7 +43,7 @@ class App extends React.Component {
                   />
                   <Route
                     path='/users'
-                    render={() => <UsersContainer/>}
+                    render={() => <UsersContainer pageTitle={'Пользователи'}/>}
                   />
                 </Switch>
               </Suspense>
