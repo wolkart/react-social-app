@@ -9,6 +9,11 @@ const instance = axios.create({
     }
 })
 
+export enum ResultCodes {
+    Success = 0,
+    Error = 1
+}
+
 type UserResponseType = {
     id: number
     name: string
@@ -23,6 +28,12 @@ type GetUsersResponseType = {
     error: string | null
 }
 
+type FollowType = {
+    data: any
+    resultCode: ResultCodes
+    messages: string[]
+}
+
 export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 10) {
         return instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`)
@@ -31,10 +42,10 @@ export const usersAPI = {
             })
     },
     follow(userId: number) {
-        return instance.post(`follow/${userId}`)
+        return instance.post<FollowType>(`follow/${userId}`)
     },
     unfollow(userId: number) {
-        return instance.delete(`follow/${userId}`)
+        return instance.delete<FollowType>(`follow/${userId}`)
     },
     getProfile(userId: number) {
         console.log('Obsolete method. Please profileAPI object.')
@@ -44,7 +55,7 @@ export const usersAPI = {
 
 export const profileAPI = {
     getProfile(userId: number) {
-        return instance.get(`profile/${userId}`)
+        return instance.get<ProfileType>(`profile/${userId}`)
     },
     getStatus(userId: number) {
         return instance.get(`profile/status/${userId}`)
@@ -54,6 +65,7 @@ export const profileAPI = {
     },
     changePhoto(photoFile: any) {
         const formData = new FormData()
+
         formData.append('image', photoFile)
 
         return instance.put(`profile/photo`, formData, {
@@ -65,11 +77,6 @@ export const profileAPI = {
     saveProfile(profile: ProfileType) {
         return instance.put('profile', profile)
     }
-}
-
-export enum ResultCodes {
-    Success = 0,
-    Error = 1
 }
 
 type GetMeResponseType = {
