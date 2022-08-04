@@ -156,12 +156,12 @@ const _followUnfollowFlow = async (dispatch: DispatchType,
 
 export const follow = (userId: number): ThunkActionType =>
     async (dispatch) => {
-        _followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), followSuccess)
+        await _followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), followSuccess)
     }
 
 export const unfollow = (userId: number): ThunkActionType =>
     async (dispatch) => {
-        _followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), unfollowSuccess)
+        await _followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), unfollowSuccess)
     }
 
 export default usersReducer
