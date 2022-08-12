@@ -1,5 +1,6 @@
-import {authAPI, ResultCodes} from "../api/api";
+import {ResultCodesEnum} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {authAPI} from "../api/auth-api";
 
 const SET_USER_DATA = 'social-app/SET_USER_DATA'
 
@@ -49,7 +50,7 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
 export const getAuthUserData = () => async (dispatch: any) => {
   const me = await authAPI.getMe()
 
-  if (me.resultCode === ResultCodes.Success) {
+  if (me.resultCode === ResultCodesEnum.Success) {
     const {id, email, login} = me.data
     dispatch(setAuthUserData(id, email, login, true))
   }
@@ -58,7 +59,7 @@ export const getAuthUserData = () => async (dispatch: any) => {
 export const login = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
   const loginData = await authAPI.login(email, password, rememberMe)
 
-  if (loginData.resultCode === ResultCodes.Success) {
+  if (loginData.resultCode === ResultCodesEnum.Success) {
     dispatch(getAuthUserData())
   } else {
     const message = loginData.messages.length > 0 ? loginData.messages[0] : "Some error"
