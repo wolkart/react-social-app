@@ -1,13 +1,15 @@
+import {ActionsType} from "./store-redux";
+
 const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
 const SEND_MESSAGE = 'ADD-SEND_MESSAGE'
 
-type DialogType = {
+export type DialogType = {
   id: number
   name: string
   photo: string
 }
 
-type MessageType = {
+export type MessageType = {
   id: number
   message: string
 }
@@ -42,16 +44,16 @@ const initialState: InitialStateType = {
   ]
 }
 
-const dialogsReducer = (state = initialState, action: any): InitialStateType => {
+const dialogsReducer = (state = initialState, action: DialogsActionType): InitialStateType => {
   switch (action.type) {
-    case SEND_MESSAGE: {
+    case 'SEND_MESSAGE': {
       return {
         ...state,
         messages: [
           ...state.messages,
           {
             id: 4,
-            message: action.newMessageBody
+            message: action.payload
           }
         ]
       }
@@ -61,11 +63,10 @@ const dialogsReducer = (state = initialState, action: any): InitialStateType => 
   }
 }
 
-type SendMessageActionType = {
-  type: typeof SEND_MESSAGE
-  newMessageBody: string
-}
+type DialogsActionType = ActionsType<typeof actions>
 
-export const sendMessage = (newMessageBody: string): SendMessageActionType => ({type: SEND_MESSAGE, newMessageBody})
+export const actions = {
+  sendMessage: (payload: string) => ({type: 'SEND_MESSAGE', payload} as const)
+}
 
 export default dialogsReducer

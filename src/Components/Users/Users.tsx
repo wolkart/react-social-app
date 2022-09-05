@@ -5,8 +5,7 @@ import {User} from "./User";
 import {UserType} from "../../types/types";
 
 type PropsType = {
-    pageTitle: string
-    users: Array<UserType>
+    users: UserType[]
     totalUsersCount: number
     pageSize: number
     currentPage: number
@@ -26,12 +25,11 @@ export const Users: FC<PropsType> = (
         followingInProgress,
         unfollow,
         follow,
-        pageTitle
     }) => {
 
     return (
         <div className="Users">
-            <h1>{pageTitle}</h1>
+            <h1>Пользователи</h1>
             <Pagination
                 pageSize={pageSize}
                 currentPage={currentPage}

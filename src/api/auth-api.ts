@@ -1,4 +1,4 @@
-import {instance, ResponseType} from "./api";
+import {instance, APIResponseType} from "./api";
 
 type MeResponseDataType = {
     id: number
@@ -13,11 +13,11 @@ type LoginResponseDataType = {
 
 export const authAPI = {
     getMe() {
-        return instance.get<ResponseType<MeResponseDataType>>('auth/me')
+        return instance.get<APIResponseType<MeResponseDataType>>('auth/me')
             .then(res => res.data)
     },
     login(email: string, password: string, rememberMe = false) {
-        return instance.post<ResponseType<LoginResponseDataType>>('auth/login', {email, password, rememberMe})
+        return instance.post<APIResponseType<LoginResponseDataType>>('auth/login', {email, password, rememberMe})
             .then(res => res.data)
     },
     logout() {

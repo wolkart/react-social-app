@@ -1,8 +1,7 @@
 import {updateObjectInArray} from "../utils/object-helpers";
 import {UserType} from "../types/types";
-import {ActionsType, AppStateType} from "./store-redux";
+import {ActionsType, ThunkType} from "./store-redux";
 import {Dispatch} from "redux";
-import {ThunkAction} from "redux-thunk";
 import {usersAPI} from "../api/users-api";
 
 //todo: можно убрать константы, т.к. actions creators типизированы как as const
@@ -15,7 +14,7 @@ import {usersAPI} from "../api/users-api";
 // const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 type InitialStateType = {
-    users: Array<UserType>
+    users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
@@ -89,9 +88,8 @@ export const actions = {
 }
 
 type DispatchType = Dispatch<UserActionsType>
-type ThunkActionType = ThunkAction<Promise<void>, AppStateType, unknown, UserActionsType>
 
-export const requestUsers = (page: number, pageSize: number): ThunkActionType =>
+export const requestUsers = (page: number, pageSize: number): ThunkType<UserActionsType> =>
     async (dispatch,
            getState) => {
         dispatch(actions.toggleIsFetching(true))
@@ -119,12 +117,12 @@ const _followUnfollowFlow = async (dispatch: DispatchType,
     dispatch(actions.toggleFollowingProgress(false, userId))
 }
 
-export const follow = (userId: number): ThunkActionType =>
+export const follow = (userId: number): ThunkType<UserActionsType> =>
     async (dispatch) => {
         await _followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), actions.followSuccess)
     }
 
-export const unfollow = (userId: number): ThunkActionType =>
+export const unfollow = (userId: number): ThunkType<UserActionsType> =>
     async (dispatch) => {
         await _followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), actions.unfollowSuccess)
     }

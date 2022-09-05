@@ -1,0 +1,93 @@
+.Dialogs {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-left: 15px;
+}
+
+.DialogsInner {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.DialogsList {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 300px;
+}
+
+.DialogItem {
+  margin-bottom: 10px;
+}
+
+.DialogAvatar {
+  height: 40px;
+  width: 40px;
+  margin-right: 15px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #61dbfb;
+}
+
+.DialogAvatar {
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.DialogLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #61dbfb;
+  transition: all .2s ease;
+}
+
+.DialogLink {
+  &.active {
+    color: #282c34;
+  }
+}
+
+.DialogLink {
+  &:hover {
+    color: #282c34;
+  }
+}
+
+.Messages {
+  width: 100%;
+}
+
+.MessageItem {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.AddMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.AddMessage {
+  textarea {
+    width: 200px;
+    height: 70px;
+    margin-bottom: 10px;
+  }
+}
+
+.DialogButton {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 1px solid #8f8f8f;
+  background-color: #fff;
+}

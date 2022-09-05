@@ -30,11 +30,7 @@ type MapDispatchPropsType = {
     follow: (userId: number) => void
 }
 
-type OwnPropsType = {
-    pageTitle: string
-}
-
-type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType
+type PropsType = MapStatePropsType & MapDispatchPropsType
 
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
@@ -52,7 +48,6 @@ class UsersContainer extends React.Component<PropsType> {
             <>
                 {this.props.isFetching ? <Preloader/> : null}
                 <Users
-                    pageTitle={this.props.pageTitle}
                     totalUsersCount={this.props.totalUsersCount}
                     pageSize={this.props.pageSize}
                     users={this.props.users}
@@ -78,8 +73,9 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-export default compose<React.Component>(
-    connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
+export default compose<React.ComponentType>(
+    connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>
+    (mapStateToProps, {
         follow,
         unfollow,
         requestUsers: requestUsers
