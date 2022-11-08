@@ -1,15 +1,15 @@
-import React, {FC} from 'react'
+import React, {FC, memo} from 'react'
 import './MyPosts.scss'
 import {PostsList} from "./PostsList/PostsList";
 import {AddPostFormRedux, NewPostForm} from '../../Forms/AddPostForm';
 import {PostType} from "../../../types/types";
 
 type PropsType = {
-    posts: PostType
+    posts: PostType[]
     addNewPost: (value: string) => void
 }
 
-export const MyPosts: FC<PropsType> = React.memo(props => {
+export const MyPosts: FC<PropsType> = memo(props => {
   const onAddPost = (values: NewPostForm) => {
     props.addNewPost(values.newPost)
   }

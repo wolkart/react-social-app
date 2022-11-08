@@ -1,11 +1,9 @@
-import {createField, Textarea} from "../common/Forms/FormsControls";
+import {createField, GetFormKeys, Textarea} from "../common/Forms/FormsControls";
 import {maxLength, required} from "../../utils/validators/validators";
 import {reduxForm} from "redux-form";
 import React, {FC} from "react";
 import {DialogNewMessageForm} from "../Dialogs/Dialogs";
 import {InjectedFormProps} from "redux-form/lib/reduxForm";
-
-export type DialogMessageFormKeys = Extract<keyof DialogNewMessageForm, string>
 
 const maxLength100 = maxLength(100)
 
@@ -16,7 +14,7 @@ const AddMessageForm: FC<InjectedFormProps<DialogNewMessageForm>> = (
 
     return (
         <form onSubmit={handleSubmit}>
-            {createField<DialogMessageFormKeys>(
+            {createField<GetFormKeys<DialogNewMessageForm>>(
                 'Enter new message',
                 'newMessage',
                 Textarea,

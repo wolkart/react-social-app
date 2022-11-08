@@ -1,10 +1,19 @@
-import React from "react";
+import React, {FC} from "react";
 import './Contacts.scss'
 
-export const Contact = ({title, value}) => {
-  return (
-    value && <div className='Contact'>
-      <a href={value} target={'_blank'} className="Contact__link">{title}</a>
-    </div>
-  )
+type PropsType = {
+    title: string
+    value: string
+}
+
+export const Contact: FC<PropsType> = (
+    {
+        title,
+        value
+    }) => {
+    return (
+        <div className='Contact'>
+          <a href={value} target={'_blank'} className="Contact__link">{title}</a>
+        </div>
+    )
 }
