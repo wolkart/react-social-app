@@ -2,6 +2,7 @@ import {FormAction, stopSubmit} from "redux-form";
 import {PhotosType, PostType, ProfileType} from "../types/types";
 import {profileAPI} from "../api/profile-api";
 import {ActionsType, ThunkType} from "./store-redux";
+import {Dispatch} from "redux";
 
 const initialState = {
     posts: [
@@ -42,8 +43,10 @@ const profileReducer = (state = initialState, action: ProfileActionsType): Initi
     }
 }
 
-type ProfileActionsType = ActionsType<typeof actions>
+export type ProfileActionsType = ActionsType<typeof actions>
 type ProfileThunkType = ThunkType<ProfileActionsType | FormAction>
+
+export type ProfileDispatchType = Dispatch<ProfileActionsType>
 
 export const actions = {
     addNewPost: (newPost: string) => ({type: 'ADD_POST', newPost} as const),

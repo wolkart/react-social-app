@@ -6,7 +6,7 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import { ProfileType } from '../../types/types';
 
 export type ProfilePropsType = {
-    profile: ProfileType
+    profile: ProfileType | null
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean

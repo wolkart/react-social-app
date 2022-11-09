@@ -1,14 +1,19 @@
-import React from 'react'
+import React, {FC} from 'react'
 import './PostItem.scss'
 
-export const PostItem = (props) => {
-  return (
-      <div className="PostItem">
-        <div className="PostItem__ava">
-          <img src="https://cs13.pikabu.ru/avatars/2729/x2729750-428926448.png" alt=""/>
+type PropsType = {
+    message: string
+    like: number
+}
+
+export const PostItem: FC<PropsType> = ({message, like}) => {
+    return (
+        <div className="PostItem">
+            <div className="PostItem__ava">
+                <img src="https://cs13.pikabu.ru/avatars/2729/x2729750-428926448.png" alt=""/>
+            </div>
+            <span className="PostItem__message">{message}</span>
+            <span className="PostItem__like">Like {like}</span>
         </div>
-        <span className="PostItem__message">{props.message}</span>
-        <span className="PostItem__like">Like {props.like }</span>
-      </div>
-  )
+    )
 }
