@@ -2,14 +2,9 @@ import React, {FC, memo} from 'react'
 import './MyPosts.scss'
 import {PostsList} from "./PostsList/PostsList";
 import {AddPostFormRedux, NewPostForm} from '../../Forms/AddPostForm';
-import {PostType} from "../../../types/types";
+import {MapDispatchPropsType, MapStateToPropsType} from "./MyPostsContainer";
 
-type PropsType = {
-    posts: PostType[]
-    addNewPost: (value: string) => void
-}
-
-export const MyPosts: FC<PropsType> = memo(props => {
+export const MyPosts: FC<MapStateToPropsType & MapDispatchPropsType> = memo(props => {
   const onAddPost = (values: NewPostForm) => {
     props.addNewPost(values.newPost)
   }

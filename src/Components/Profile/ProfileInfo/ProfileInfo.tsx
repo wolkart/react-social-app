@@ -7,14 +7,14 @@ import {ProfileInfoList} from "./ProfileInfoList";
 import {Contact} from "./Contacts";
 import ProfileInfoForm from "./ProfileInfoForm";
 import './Contacts.scss'
-import {ProfilePropsType} from "../Profile";
 import {ContactsType, ProfileType} from "../../../types/types";
+import {ProfilePropsType} from "../ProfileContainer";
 
 export const ProfileInfo: FC<ProfilePropsType> = (
     {
         profile,
         status,
-        updateStatus,
+        updateUserStatus,
         isOwner,
         changePhoto,
         saveProfile
@@ -48,7 +48,7 @@ export const ProfileInfo: FC<ProfilePropsType> = (
                 <div className="ProfileInfo__name">{profile.fullName}</div>
                 <ProfileStatusWithHooks
                   status={status}
-                  updateStatus={updateStatus}
+                  updateStatus={updateUserStatus}
                   isOwner={isOwner}
                 />
                 <ProfileInfoList
