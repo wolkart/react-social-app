@@ -3,9 +3,18 @@ import './Profile.scss'
 import {Wallpaper} from "./Wallpaper/Wallpaper";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ProfilePropsType} from "./ProfileContainer";
+import {ProfileType} from "../../types/types";
 
-export const Profile: FC<ProfilePropsType> = (
+export type ProfileInfoPropsType = {
+    profile: ProfileType | null
+    status: string
+    updateUserStatus: (status: string) => void
+    isOwner: boolean
+    changePhoto: (file: File) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
+}
+
+export const Profile: FC<ProfileInfoPropsType> = (
     {
         profile,
         status,

@@ -9,8 +9,9 @@ import ProfileInfoForm from "./ProfileInfoForm";
 import './Contacts.scss'
 import {ContactsType, ProfileType} from "../../../types/types";
 import {ProfilePropsType} from "../ProfileContainer";
+import {ProfileInfoPropsType} from "../Profile";
 
-export const ProfileInfo: FC<ProfilePropsType> = (
+export const ProfileInfo: FC<ProfileInfoPropsType> = (
     {
         profile,
         status,

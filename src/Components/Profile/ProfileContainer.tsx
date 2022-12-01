@@ -9,7 +9,11 @@ import {compose} from "redux";
 import {AppStateType} from "../../redux/store-redux";
 import {ProfileType} from "../../types/types";
 
-export type MapStatePropsType = ReturnType<typeof mapStateToProps>
+export type MapStatePropsType = {
+    profile: ProfileType | null
+    status: string
+    authorizedUserId: number | null
+}
 export type MapDispatchPropsType = {
     getUserProfile: (userId: number | null) => void
     getUserStatus: (userId: number | null) => void
@@ -20,12 +24,15 @@ export type MapDispatchPropsType = {
 export type OtherPropsType = {
     isOwner: boolean
 }
-
 type PathParamsType = {
     userId: string
 }
 
-export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType & OtherPropsType & RouteComponentProps<PathParamsType>;
+export type ProfilePropsType =
+    MapStatePropsType
+    & MapDispatchPropsType
+    & OtherPropsType
+    & RouteComponentProps<PathParamsType>;
 
 class ProfileContainer extends React.Component<ProfilePropsType> {
     constructor(props: ProfilePropsType) {
@@ -36,8 +43,13 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         let userId: number | null = +this.props.match.params.userId
         if (!userId) userId = this.props.authorizedUserId
 
-        this.props.getUserProfile(userId)
-        this.props.getUserStatus(userId)
+        if (!userId) {
+            console.error('Ошибка')
+        } else {
+            this.props.getUserProfile(userId)
+            this.props.getUserStatus(userId)
+        }
+
     }
 
     componentDidMount() {
@@ -64,7 +76,7 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
     }
 }
 
-const mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
@@ -73,7 +85,7 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 export default compose<ComponentType>(
-    connect<MapStatePropsType, MapDispatchPropsType, OtherPropsType, AppStateType>(
+    connect(
         mapStateToProps,
         {getUserProfile, getUserStatus, updateUserStatus, changePhoto, saveProfile}),
     withRouter,
