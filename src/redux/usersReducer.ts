@@ -3,6 +3,7 @@ import {UserType} from "../types/types";
 import {ActionsType, ThunkType} from "./store-redux";
 import {Dispatch} from "redux";
 import {usersAPI} from "../api/users-api";
+import {APIResponseType} from "../api/api";
 
 //todo: можно убрать константы, т.к. actions creators типизированы как as const
 // const FOLLOW = 'FOLLOW'
@@ -104,13 +105,13 @@ export const requestUsers = (page: number, pageSize: number): ThunkType<UserActi
 
 const _followUnfollowFlow = async (dispatch: DispatchType,
                                    userId: number,
-                                   apiMethod: any,
+                                   apiMethod: (userId: number) => Promise<APIResponseType>,
                                    actionCreator: (userId: number) => UserActionsType) => {
     dispatch(actions.toggleFollowingProgress(true, userId))
 
     const response = await apiMethod(userId)
 
-    if (response.data.resultCode === 0) {
+    if (response.resultCode === 0) {
         dispatch(actionCreator(userId))
     }
 
