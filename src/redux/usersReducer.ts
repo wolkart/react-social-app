@@ -84,7 +84,7 @@ export const actions = {
         type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
         isFetching,
         userId
-     } as const)
+    } as const)
 }
 
 type DispatchType = Dispatch<UserActionsType>

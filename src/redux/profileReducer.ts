@@ -94,7 +94,7 @@ export const saveProfile = (profile: ProfileType): ProfileThunkType =>
 
         if (data.resultCode === 0) {
             if (userId !== null) {
-                dispatch(getUserProfile(userId))
+               await dispatch(getUserProfile(userId))
             } else {
                 throw new Error("User id can't be null")
             }
