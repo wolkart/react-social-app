@@ -1,4 +1,14 @@
 .Users {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+      margin-top: 0;
+      margin-right: 20px;
+    }
+  }
+
   &__heading {
     font-size: 22px;
     font-weight: bold;
@@ -7,5 +17,12 @@
 
   &__list {
     margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    flex: 0 0 33.333%;
+    margin-bottom: 20px;
   }
 }

@@ -14,25 +14,23 @@ import {APIResponseType} from "../api/api";
 // const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 // const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
-type InitialStateType = {
-    users: UserType[]
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-    followingInProgress: Array<number> // array of users ids
-}
-
-const initialState: InitialStateType = {
-    users: [],
+const initialState = {
+    users: [] as UserType[],
     pageSize: 50,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: []
+    followingInProgress: [] as number[],
+    filter: {
+        term: "",
+        friend: null as null | boolean
+    }
 }
 
-const usersReducer = (state = initialState, action: UserActionsType): InitialStateType => {
+export type InitialStateUsersType = typeof initialState
+export type FilterUsersType = typeof initialState.filter
+
+const usersReducer = (state = initialState, action: UserActionsType): InitialStateUsersType => {
     switch (action.type) {
         case 'FOLLOW':
             return {
@@ -67,6 +65,9 @@ const usersReducer = (state = initialState, action: UserActionsType): InitialSta
                     : state.followingInProgress.filter(id => id != action.userId)
             }
         }
+        case "SET_FILTER": {
+            return {...state, filter: action.payload}
+        }
         default:
             return state
     }
@@ -85,18 +86,20 @@ export const actions = {
         type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
         isFetching,
         userId
-    } as const)
+    } as const),
+    setFilter: (filter: FilterUsersType) => ({type: 'SET_FILTER', payload: filter } as const)
 }
 
 type DispatchType = Dispatch<UserActionsType>
 
-export const requestUsers = (page: number, pageSize: number): ThunkType<UserActionsType> =>
+export const requestUsers = (page: number, pageSize: number, filter: FilterUsersType): ThunkType<UserActionsType> =>
     async (dispatch,
            getState) => {
         dispatch(actions.toggleIsFetching(true))
         dispatch(actions.setCurrentPage(page))
+        dispatch(actions.setFilter(filter))
 
-        const data = await usersAPI.getUsers(page, pageSize)
+        const data = await usersAPI.getUsers(page, pageSize, filter.term, filter.friend)
 
         dispatch(actions.setUsers(data.items))
         dispatch(actions.toggleIsFetching(false))

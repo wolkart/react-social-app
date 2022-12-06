@@ -3,6 +3,8 @@ import './Users.scss'
 import {Pagination} from "../common/Pagination/Pagination";
 import {User} from "./User";
 import {UserType} from "../../types/types";
+import {UsersSearchForm} from "./UsersSearchForm";
+import {FilterUsersType} from "../../redux/usersReducer";
 
 type PropsType = {
     users: UserType[]
@@ -13,6 +15,7 @@ type PropsType = {
     followingInProgress: Array<number>
     unfollow: (userId: number) => void
     follow: (userId: number) => void
+    onFilterChange: (filter: FilterUsersType) => void
 }
 
 export const Users: FC<PropsType> = (
@@ -25,27 +28,36 @@ export const Users: FC<PropsType> = (
         followingInProgress,
         unfollow,
         follow,
+        onFilterChange
     }) => {
 
     return (
         <div className="Users">
-            <h1>Пользователи</h1>
-            <Pagination
+            <div className="Users__header">
+                <h1>Пользователи</h1>
+                <UsersSearchForm
+                    onFilterChange={onFilterChange}
+                />
+            </div>
+            {totalUsersCount > 0 && <Pagination
                 pageSize={pageSize}
                 currentPage={currentPage}
                 totalItemsCount={totalUsersCount}
                 onPageChanged={onPageChanged}
-            />
+            />}
             <div className="Users__list">
-                {
-                    users.map(user => <User
-                            key={user.id}
-                            user={user}
-                            followingInProgress={followingInProgress}
-                            follow={follow}
-                            unfollow={unfollow}
-                        />
-                    )
+                {totalUsersCount > 0
+                    ? users.map(user => (
+                        <div key={user.id} className="Users__item">
+                            <User
+                                user={user}
+                                followingInProgress={followingInProgress}
+                                follow={follow}
+                                unfollow={unfollow}
+                            />
+                        </div>
+                    ))
+                    : <div>Пользователи не найдены</div>
                 }
             </div>
         </div>
