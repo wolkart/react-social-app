@@ -3,13 +3,21 @@ import './Users.scss'
 import {Pagination} from "../common/Pagination/Pagination";
 import {User} from "./User";
 import {UsersSearchForm} from "./UsersSearchForm";
-import {FilterUsersType, follow, requestUsers, unfollow} from "../../redux/usersReducer";
+import {FilterUsersType, requestUsers} from "../../redux/usersReducer";
 import {useAppSelector} from "../../hooks/useAppSelector";
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {Preloader} from "../common/Preloader";
 
 export const UsersPage: FC = () => {
-    const {users, totalUsersCount, pageSize, currentPage, filter, followingInProgress, isFetching} = useAppSelector(state => state.usersPage)
+    const {
+        users,
+        totalUsersCount,
+        pageSize,
+        currentPage,
+        filter,
+        followingInProgress,
+        isFetching
+    } = useAppSelector(state => state.usersPage)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -34,12 +42,13 @@ export const UsersPage: FC = () => {
                         onFilterChange={onFilterChange}
                     />
                 </div>
-                {totalUsersCount > 0 && <Pagination
-                    pageSize={pageSize}
-                    currentPage={currentPage}
-                    totalItemsCount={totalUsersCount}
-                    onPageChanged={onPageChanged}
-                />}
+                {totalUsersCount > 0 &&
+                    <Pagination
+                        pageSize={pageSize}
+                        currentPage={currentPage}
+                        totalItemsCount={totalUsersCount}
+                        onPageChanged={onPageChanged}
+                    />}
                 <div className="Users__list">
                     {totalUsersCount > 0
                         ? users.map(user => (
@@ -47,8 +56,6 @@ export const UsersPage: FC = () => {
                                 <User
                                     user={user}
                                     followingInProgress={followingInProgress}
-                                    follow={dispatch(follow)}
-                                    unfollow={dispatch(unfollow)}
                                 />
                             </div>
                         ))

@@ -3,22 +3,21 @@ import './User.scss'
 import userStub from '../../assets/images/ava-stub.jpg'
 import {NavLink} from "react-router-dom";
 import {UserType} from "../../types/types";
+import {useDispatch} from "react-redux";
+import {follow, unfollow} from '../../redux/usersReducer';
 
 type PropsType = {
     user: UserType
     followingInProgress: number[]
-    unfollow: (userId: number) => void
-    follow: (userId: number) => void
 }
 
 export const User: FC<PropsType> = (
     {
         user,
         followingInProgress,
-        unfollow,
-        follow
     }
 ) => {
+    const dispatch = useDispatch()
 
     return (
         <div className="User">
@@ -41,7 +40,7 @@ export const User: FC<PropsType> = (
                         <button
                             disabled={followingInProgress.some(id => id === user.id)}
                             onClick={() => {
-                                unfollow(user.id)
+                                dispatch(unfollow(user.id))
                             }}
                             className="User__button">
                             Unfollow
@@ -49,7 +48,7 @@ export const User: FC<PropsType> = (
                         : <button
                             disabled={followingInProgress.some(id => id === user.id)}
                             onClick={() => {
-                                follow(user.id)
+                                dispatch(follow(user.id))
                             }}
                             className="User__button">
                             Follow
