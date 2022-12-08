@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import {connect} from "react-redux";
 import {login} from "../../redux/authReducer";
 import {Redirect} from "react-router-dom";
-import {AppStateType} from "../../redux/store-redux";
+import {AppStateType} from "../../redux/store";
 import { LoginReduxForm } from "../Forms/LoginForm";
 
 type MapStateToPropsType = {

@@ -10,13 +10,13 @@ import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
 import {Preloader} from "./Components/common/Preloader";
-import store, {AppStateType} from "./redux/store-redux";
-import UsersContainer from "./Components/Users/UsersContainer";
-import { withSuspense } from './Components/hoc/withSuspense';
+import store, {AppStateType} from "./redux/store";
+import {withSuspense} from './Components/hoc/withSuspense';
+import {UsersPage} from './Components/Users/UsersPage';
 
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'))
-// const UsersContainer = React.lazy(() => import('./Components/Users/UsersContainer'))
+// const UsersContainer = React.lazy(() => import('./Components/UsersPage/UsersContainer'))
 
 type MapProps = ReturnType<typeof mapStateToProps>
 type DispatchProps = {
@@ -53,7 +53,7 @@ class App extends React.Component<MapProps & DispatchProps> {
                                 />
                                 <Route
                                     path='/users'
-                                    render={() => <UsersContainer/>}
+                                    render={() => <UsersPage/>}
                                 />
                                 <Route
                                     path='/music'

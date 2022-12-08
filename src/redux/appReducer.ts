@@ -1,6 +1,6 @@
 import {getAuthUserData} from "./authReducer";
 import {ThunkAction} from "redux-thunk";
-import {ActionsType, AppStateType} from "./store-redux";
+import {ActionsType, AppStateType} from "./store";
 
 const initialState = {
     initialized: false

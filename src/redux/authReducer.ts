@@ -1,7 +1,7 @@
 import {ResultCodesEnum} from "../api/api";
 import {FormAction, stopSubmit} from "redux-form";
 import {authAPI} from "../api/auth-api";
-import {ActionsType, ThunkType} from "./store-redux";
+import {ActionsType, ThunkType} from "./store";
 
 const initialState = {
     userId: null as number | null,

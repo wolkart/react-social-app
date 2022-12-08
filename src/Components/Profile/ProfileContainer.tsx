@@ -6,7 +6,7 @@ import {changePhoto, getUserProfile, getUserStatus, saveProfile, updateUserStatu
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {AppStateType} from "../../redux/store-redux";
+import {AppStateType} from "../../redux/store";
 import {ProfileType} from "../../types/types";
 
 export type MapStatePropsType = {
