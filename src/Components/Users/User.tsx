@@ -14,7 +14,7 @@ type PropsType = {
 export const User: FC<PropsType> = (
     {
         user,
-        followingInProgress,
+        followingInProgress
     }
 ) => {
     const dispatch = useDispatch()

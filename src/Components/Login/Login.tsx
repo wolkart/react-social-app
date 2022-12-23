@@ -1,17 +1,9 @@
 import React, {FC} from "react";
-import {connect} from "react-redux";
 import {login} from "../../redux/authReducer";
 import {Redirect} from "react-router-dom";
-import {AppStateType} from "../../redux/store";
-import { LoginReduxForm } from "../Forms/LoginForm";
-
-type MapStateToPropsType = {
-    isAuth: boolean
-}
-
-type MapDispatchPropsType = {
-    login: (email: string, password: string, rememberMe: boolean) => void
-}
+import {LoginReduxForm} from "../Forms/LoginForm";
+import {useAppSelector} from "../../hooks/useAppSelector";
+import {useDispatch} from "react-redux";
 
 export type LoginFormDataType = {
     rememberMe: boolean
@@ -20,9 +12,12 @@ export type LoginFormDataType = {
 }
 
 
-const Login: FC<MapStateToPropsType & MapDispatchPropsType> = ({isAuth}) => {
+export const Login: FC = () => {
+    const {isAuth} = useAppSelector(state => state.auth)
+    const dispatch = useDispatch()
+
     const onSubmit = (formData: LoginFormDataType) => {
-        login(formData.email, formData.password, formData.rememberMe)
+        dispatch(login(formData.email, formData.password, formData.rememberMe))
     }
 
     if (isAuth) {
@@ -38,11 +33,3 @@ const Login: FC<MapStateToPropsType & MapDispatchPropsType> = ({isAuth}) => {
         </div>
     )
 }
-
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        isAuth: state.auth.isAuth
-    }
-}
-
-export default connect(mapStateToProps, {login})(Login)

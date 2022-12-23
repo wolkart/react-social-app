@@ -1,9 +1,9 @@
 import React, {FC} from 'react'
 import './Profile.scss'
 import {Wallpaper} from "./Wallpaper/Wallpaper";
-import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {ProfileType} from "../../types/types";
+import {MyPosts} from './MyPosts/MyPosts';
 
 export type ProfileInfoPropsType = {
     profile: ProfileType | null
@@ -34,7 +34,7 @@ export const Profile: FC<ProfileInfoPropsType> = (
                 changePhoto={changePhoto}
                 saveProfile={saveProfile}
             />
-            <MyPostsContainer/>
+            <MyPosts/>
         </div>
     )
 }

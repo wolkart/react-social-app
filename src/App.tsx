@@ -5,7 +5,7 @@ import {NavBar} from "./Components/NavBar/NavBar";
 import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import {Music} from "./Components/Music/Music";
 import HeaderContainer from "./Components/Header/HeaderContainer";
-import Login from "./Components/Login/Login";
+import {Login} from "./Components/Login/Login";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer";
