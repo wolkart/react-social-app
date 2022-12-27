@@ -7,6 +7,14 @@ import {FilterUsersType, requestUsers} from "../../redux/usersReducer";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {useDispatch} from 'react-redux';
 import {Preloader} from "../common/Preloader";
+import {useHistory} from "react-router-dom";
+import queryString from "querystring";
+
+type QueryParamsType = {
+    term?: string
+    friend?: string
+    page?: string
+}
 
 export const UsersPage: FC = () => {
     const {
@@ -19,10 +27,45 @@ export const UsersPage: FC = () => {
         isFetching
     } = useAppSelector(state => state.usersPage)
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
-        dispatch(requestUsers(currentPage, pageSize, filter))
+        const parsedSearch = queryString.parse(history.location.search.substring(1))
+
+        let actualPage = currentPage
+        let actualFilter = filter
+
+        if (parsedSearch.page) actualPage = Number(parsedSearch.page)
+
+        if (parsedSearch.term) actualFilter = {...actualFilter, term: parsedSearch.term as string}
+
+        switch (parsedSearch.friend) {
+            case 'null':
+                actualFilter = {...actualFilter, friend: null}
+                break
+            case 'true':
+                actualFilter = {...actualFilter, friend: true}
+                break
+            case 'false':
+                actualFilter = {...actualFilter, friend: false}
+                break
+        }
+
+        dispatch(requestUsers(actualPage, pageSize, actualFilter))
     }, [])
+
+    useEffect(() => {
+        const query: QueryParamsType = {}
+
+        if (filter.term) query.term = filter.term
+        if (filter.friend !== null) query.friend = String(filter.friend)
+        query.page = String(currentPage)
+
+        history.push({
+            pathname: `${history.location.pathname}`,
+            search: queryString.stringify(query)
+        })
+    }, [filter, currentPage])
 
     const onFilterChange = (filter: FilterUsersType) => {
         dispatch(requestUsers(1, pageSize, filter))
