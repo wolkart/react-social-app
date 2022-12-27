@@ -4,7 +4,6 @@ import {Footer} from "./Components/Footer/Footer";
 import {NavBar} from "./Components/NavBar/NavBar";
 import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import {Music} from "./Components/Music/Music";
-import HeaderContainer from "./Components/Header/HeaderContainer";
 import {Login} from "./Components/Login/Login";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
@@ -13,8 +12,9 @@ import {Preloader} from "./Components/common/Preloader";
 import store, {AppStateType} from "./redux/store";
 import {withSuspense} from './Components/hoc/withSuspense';
 import {UsersPage} from './Components/Users/UsersPage';
+import {Header} from "./Components/Header/Header";
 
-const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'))
+const Dialogs = React.lazy(() => import('./Components/Dialogs/Dialogs'))
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'))
 // const UsersContainer = React.lazy(() => import('./Components/UsersPage/UsersContainer'))
 
@@ -33,7 +33,7 @@ class App extends React.Component<MapProps & DispatchProps> {
 
         return (
             <div className="App">
-                <HeaderContainer/>
+                <Header/>
                 <div className="MainContainer">
                     <div className="MainContainer__inner">
                         <NavBar/>
@@ -49,7 +49,7 @@ class App extends React.Component<MapProps & DispatchProps> {
                                 />
                                 <Route
                                     path='/dialogs'
-                                    render={withSuspense(DialogsContainer)}
+                                    render={withSuspense(Dialogs)}
                                 />
                                 <Route
                                     path='/users'
