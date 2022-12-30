@@ -2,12 +2,14 @@ import {ResultCodesEnum} from "../api/api";
 import {FormAction, stopSubmit} from "redux-form";
 import {authAPI} from "../api/auth-api";
 import {ActionsType, AppDispatch, ThunkType} from "./store";
+import {profileAPI} from "../api/profile-api";
 
 const initialState = {
     userId: null as number | null,
     email: null as string | null,
     login: null as string | null,
-    isAuth: false
+    isAuth: false,
+    photo: null as string | null
 }
 
 type InitialStateType = typeof initialState
@@ -23,6 +25,8 @@ const authReducer = (state = initialState, action: AuthActionType): InitialState
             }
         case "SET_IS_AUTH":
             return {...state, isAuth: action.payload}
+        case "SET_PHOTO":
+            return {...state, photo: action.payload}
         default:
             return state
     }
@@ -30,7 +34,8 @@ const authReducer = (state = initialState, action: AuthActionType): InitialState
 export const actions = {
     setAuthUserData: (userId: number | null, email: string | null, login: string | null) => (
         {type: 'SET_USER_DATA', payload: {userId, email, login}} as const),
-    setIsAuth: (isAuth: boolean) => ({type: 'SET_IS_AUTH', payload: isAuth} as const)
+    setIsAuth: (isAuth: boolean) => ({type: 'SET_IS_AUTH', payload: isAuth} as const),
+    setPhoto: (payload: string | null) => ({type: 'SET_PHOTO', payload} as const)
 }
 
 export const getAuthUserData = (): ThunkAuthType =>
@@ -42,6 +47,13 @@ export const getAuthUserData = (): ThunkAuthType =>
             dispatch(actions.setAuthUserData(id, email, login))
             dispatch(actions.setIsAuth(true))
         }
+    }
+
+export const getAuthPhoto = (userId: number): ThunkAuthType =>
+    async (dispatch) => {
+        const data = await profileAPI.getProfile(userId)
+
+        dispatch(actions.setPhoto(data.photos.small))
     }
 
 export const login = (email: string, password: string, rememberMe: boolean): ThunkAuthType =>

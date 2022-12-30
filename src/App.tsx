@@ -1,94 +1,47 @@
-import React, {ComponentType, FC} from 'react';
-import './App.scss';
-import {Footer} from "./Components/Footer/Footer";
+import React, {useEffect} from 'react';
+import 'antd/dist/reset.css'
+import {AppFooter} from "./Components/Footer/Footer";
 import {NavBar} from "./Components/NavBar/NavBar";
-import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
-import {Music} from "./Components/Music/Music";
-import {Login} from "./Components/Login/Login";
-import {connect, Provider} from "react-redux";
-import {compose} from "redux";
+import {useDispatch} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
 import {Preloader} from "./Components/common/Preloader";
-import store, {AppStateType} from "./redux/store";
-import {withSuspense} from './Components/hoc/withSuspense';
-import {UsersPage} from './Components/Users/UsersPage';
-import {Header} from "./Components/Header/Header";
+import {AppHeader} from "./Components/Header/Header";
+import {AppRouter} from "./Components/Router/AppRouter";
+import {Layout, theme} from 'antd';
+import {useAppSelector} from "./hooks/useAppSelector";
 
-const Dialogs = React.lazy(() => import('./Components/Dialogs/Dialogs'))
-const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'))
-// const UsersContainer = React.lazy(() => import('./Components/UsersPage/UsersContainer'))
+const {Content, Sider } = Layout;
 
-type MapProps = ReturnType<typeof mapStateToProps>
-type DispatchProps = {
-    initializeApp: () => void
-}
+export const App = () => {
+    const {initialized} = useAppSelector(state => state.app)
+    const dispatch = useDispatch()
 
-class App extends React.Component<MapProps & DispatchProps> {
-    componentDidMount() {
-        this.props.initializeApp()
-    }
+    const {
+        token: {colorBgContainer},
+    } = theme.useToken();
 
-    render() {
-        if (!this.props.initialized) return <Preloader/>
+    useEffect(() => {
+        dispatch(initializeApp())
+    }, [])
 
-        return (
-            <div className="App">
-                <Header/>
-                <div className="MainContainer">
-                    <div className="MainContainer__inner">
-                        <NavBar/>
-                        <div className="MainContainer__content">
-                            <Switch>
-                                <Route
-                                    exact path='/'
-                                    render={() => <Redirect to={'/profile'}/>}
-                                />
-                                <Route
-                                    path='/profile/:userId?'
-                                    render={withSuspense(ProfileContainer)}
-                                />
-                                <Route
-                                    path='/dialogs'
-                                    render={withSuspense(Dialogs)}
-                                />
-                                <Route
-                                    path='/users'
-                                    render={() => <UsersPage/>}
-                                />
-                                <Route
-                                    path='/music'
-                                    render={() => <Music/>}
-                                />
-                                <Route
-                                    path='/login'
-                                    render={() => <Login/>}
-                                />
-                            </Switch>
-                        </div>
-                    </div>
-                </div>
-                <Footer/>
-            </div>
-        );
-    }
-}
+    if (!initialized) return <Preloader/>
 
-const mapStateToProps = (state: AppStateType) => ({
-    initialized: state.app.initialized
-})
-
-const AppContainer = compose<ComponentType>(
-    withRouter,
-    connect(mapStateToProps, {initializeApp}))(App)
-
-const SocialApp: FC = () => {
     return (
-        <BrowserRouter>
-            <Provider store={store}>
-                <AppContainer/>
-            </Provider>
-        </BrowserRouter>
-    )
+        <Layout>
+            <AppHeader/>
+            <Content style={
+                {display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '1280px', margin: '0 auto', minHeight: '100vh'}
+            } >
+                <Layout style={{padding: '24px 0', background: colorBgContainer, height: '100%'}}>
+                    <Sider style={{background: colorBgContainer}} width={200}>
+                        <NavBar/>
+                    </Sider>
+                    <Content style={{padding: '0 24px', minHeight: 280}}>
+                        <AppRouter/>
+                    </Content>
+                </Layout>
+            </Content>
+            <AppFooter/>
+        </Layout>
+    );
 }
-
-export default SocialApp

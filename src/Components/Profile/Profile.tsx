@@ -25,7 +25,7 @@ export const Profile: FC<ProfileInfoPropsType> = (
     }) => {
     return (
         <div className="Profile">
-            <Wallpaper/>
+            {isOwner && <Wallpaper/>}
             <ProfileInfo
                 profile={profile}
                 status={status}

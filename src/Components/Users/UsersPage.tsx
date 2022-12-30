@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import './Users.scss'
 import {Pagination} from "../common/Pagination/Pagination";
 import {User} from "./User";

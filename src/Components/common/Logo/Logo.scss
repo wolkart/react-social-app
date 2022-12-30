@@ -1,0 +1,19 @@
+.Logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  img {
+    display: flex;
+    background-color: #fff;
+    height: 50px;
+    margin-right: 5px;
+    border-radius: 50%;
+    padding: 2px;
+  }
+
+  &__name {
+    color: #fff;
+    font-weight: bold;
+  }
+}
