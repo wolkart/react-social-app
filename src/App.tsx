@@ -4,7 +4,7 @@ import {AppFooter} from "./Components/Footer/Footer";
 import {NavBar} from "./Components/NavBar/NavBar";
 import {useDispatch} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
-import {Preloader} from "./Components/common/Preloader";
+import {Preloader} from "./Components/common/Preloader/Preloader";
 import {AppHeader} from "./Components/Header/Header";
 import {AppRouter} from "./Components/Router/AppRouter";
 import {Layout, theme} from 'antd';

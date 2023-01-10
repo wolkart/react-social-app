@@ -1,28 +1,30 @@
 import React, {ChangeEvent, FC} from "react";
-import './ProfileAva.scss'
-import userStub from '../../../assets/images/ava-stub.jpg'
+import userStub from '../../../../../assets/images/ava-stub.jpg'
+import {changePhoto} from "../../../../../redux/profileReducer";
+import {useDispatch} from "react-redux";
+import { StyledProfiledAvatar } from "../styled";
 
 type PropsType = {
   image: string | null
   isOwner: boolean
-  changePhoto: (file: File) => void
 }
 
-export const ProfileAva: FC<PropsType> = ({image, isOwner, changePhoto}) => {
+export const ProfileAva: FC<PropsType> = ({image, isOwner}) => {
+  const dispatch = useDispatch()
 
   const onPhotoSelect = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files?.length) {
-      changePhoto(event.target.files[0])
+      dispatch(changePhoto(event.target.files[0]))
     }
   }
 
   return(
-    <div className="ProfileAva">
+    <StyledProfiledAvatar>
       <img src={image|| userStub} alt=""/>
       {isOwner && <label className={'FileUpload'}>
         <input type="file" name='upload' onChange={onPhotoSelect}/>
         <span className={'FileUpload__icon'}>&#128247;</span>
       </label>}
-    </div>
+    </StyledProfiledAvatar>
   )
 }

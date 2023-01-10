@@ -1,40 +1,54 @@
-import React, {FC} from 'react'
-import './Profile.scss'
-import {Wallpaper} from "./Wallpaper/Wallpaper";
-import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ProfileType} from "../../types/types";
-import {MyPosts} from './MyPosts/MyPosts';
+import React, {FC, useEffect, useRef} from 'react'
+import {OwnerCover} from "./components/OwnerCover/OwnerCover";
+import {ProfileDashboard} from "./components/ProfileDashboard/ProfileDashboard";
+import {ProfilePosts} from './components/MyPosts/ProfilePosts';
+import {useAppSelector} from "../../hooks/useAppSelector";
+import {Redirect, useParams} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {getUserProfile, getUserStatus} from '../../redux/profileReducer';
 
-export type ProfileInfoPropsType = {
-    profile: ProfileType | null
-    status: string
-    updateUserStatus: (status: string) => void
-    isOwner: boolean
-    changePhoto: (file: File) => void
-    saveProfile: (profile: ProfileType) => Promise<any>
-}
+const Profile: FC = () => {
+    const {profile, status} = useAppSelector(state => state.profilePage)
+    const {userId: ownerId, isAuth} = useAppSelector(state => state.auth)
+    const {userId: otherId} = useParams<{ userId: string | undefined }>()
+    const dispatch = useDispatch()
+    const currentUserIdRef = useRef<number>()
 
-export const Profile: FC<ProfileInfoPropsType> = (
-    {
-        profile,
-        status,
-        updateUserStatus,
-        isOwner,
-        changePhoto,
-        saveProfile
-    }) => {
+    const refreshProfile = (userId: number) => {
+        dispatch(getUserProfile(userId))
+        dispatch(getUserStatus(userId))
+        currentUserIdRef.current = userId
+    }
+
+    useEffect(() => {
+        if (otherId) {
+            refreshProfile(Number(otherId))
+        }
+    }, [])
+
+    useEffect(() => {
+        if (Number(otherId) !== currentUserIdRef.current) {
+            if (ownerId) {
+                refreshProfile(ownerId)
+            }
+        }
+    }, [otherId])
+
+    if (!isAuth) {
+        return <Redirect to={'/login'}/>
+    }
+
     return (
         <div className="Profile">
-            {isOwner && <Wallpaper/>}
-            <ProfileInfo
+            {!otherId && <OwnerCover/>}
+            <ProfileDashboard
                 profile={profile}
                 status={status}
-                updateUserStatus={updateUserStatus}
-                isOwner={isOwner}
-                changePhoto={changePhoto}
-                saveProfile={saveProfile}
+                isOwner={!otherId}
             />
-            <MyPosts/>
+            <ProfilePosts/>
         </div>
     )
 }
+
+export default Profile

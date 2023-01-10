@@ -2,7 +2,6 @@ import React, {FC, ReactNode} from "react";
 import './FormControls.scss'
 import {Field, WrappedFieldMetaProps, WrappedFieldProps} from "redux-form";
 import {FieldValidator} from "../../../utils/validators/validators";
-import {DialogNewMessageForm} from "../../Dialogs/Dialogs";
 
 type FormControlPropsType = {
     meta: WrappedFieldMetaProps
@@ -29,7 +28,7 @@ export const Textarea: FC<WrappedFieldProps> = (props) => {
     return <FormControl {...props}><textarea {...input} {...restProps}/></FormControl>
 }
 
-export const Input: FC<WrappedFieldProps> = (props) => {
+export const InputCustom: FC<WrappedFieldProps> = (props) => {
     const {input, meta, ...restProps} = props
     return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
 }

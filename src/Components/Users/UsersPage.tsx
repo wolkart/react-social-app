@@ -6,7 +6,7 @@ import {UsersSearchForm} from "./UsersSearchForm";
 import {FilterUsersType, requestUsers} from "../../redux/usersReducer";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {useDispatch} from 'react-redux';
-import {Preloader} from "../common/Preloader";
+import {Preloader} from "../common/Preloader/Preloader";
 import {useHistory} from "react-router-dom";
 import queryString from "querystring";
 

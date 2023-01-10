@@ -6,7 +6,7 @@ import {Music} from "../Music/Music";
 import {Login} from "../Login/Login";
 
 const Dialogs = React.lazy(() => import('../Dialogs/Dialogs'))
-const ProfileContainer = React.lazy(() => import('../Profile/ProfileContainer'))
+const Profile = React.lazy(() => import('../Profile/Profile'))
 
 export const AppRouter = () => {
     return (
@@ -17,7 +17,7 @@ export const AppRouter = () => {
             />
             <Route
                 path='/profile/:userId?'
-                render={withSuspense(ProfileContainer)}
+                render={withSuspense(Profile)}
             />
             <Route
                 path='/dialogs'

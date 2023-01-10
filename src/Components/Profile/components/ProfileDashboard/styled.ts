@@ -1,9 +1,23 @@
-.ProfileAva {
+import styled from "styled-components";
+import {IStyledProfileAvatar} from "./types";
+
+export const StyledProfileDashboard = styled.div`
+  display: flex;
+  padding: 20px 30px 30px;
+`
+
+export const StyledProfileDashboardAvatar = styled.div<IStyledProfileAvatar>`
+  transform: ${({isOwner}) => `translate(0, ${isOwner ? '-100px' : 0})`};
+  margin-right: 30px;
+`
+
+export const StyledProfiledAvatar = styled.div`
   position: relative;
   width: 180px;
   height: 180px;
   border-radius: 50%;
   overflow: hidden;
+  border: 2px solid #61dbfb;
 
   img {
     position: absolute;
@@ -45,4 +59,22 @@
       pointer-events: all;
     }
   }
-}
+`
+
+export const StyledProfileInfo = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+`
+
+export const StyledProfileContactLink = styled.div`
+  a {
+    transition: all 0.2s;
+    font-weight: bold;
+    text-transform: capitalize;
+
+    &:hover {
+      color: #61dbfb;
+    }
+  }
+`

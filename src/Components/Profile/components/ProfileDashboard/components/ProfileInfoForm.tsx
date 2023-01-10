@@ -1,9 +1,9 @@
 import React, {FC} from "react";
-import {createField, GetFormKeys, Input, Textarea} from "../../common/Forms/FormsControls";
+import {createField, GetFormKeys, InputCustom, Textarea} from "../../../../common/Forms/FormsControls";
 import {reduxForm} from "redux-form";
 import './ProfileInfoForm.scss'
-import '../../common/Forms/FormControls.scss'
-import {ProfileType} from "../../../types/types";
+import '../../../../common/Forms/FormControls.scss'
+import {ProfileType} from "../../../../../types/types";
 import {InjectedFormProps} from "redux-form/lib/reduxForm";
 
 type PropsType = {
@@ -20,11 +20,11 @@ const ProfileInfoForm: FC<InjectedFormProps<ProfileType, PropsType> & PropsType>
     <form className='ProfileInfoForm' onSubmit={handleSubmit}>
       <div className='ProfileInfoForm__field'>
         <div className="ProfileInfoForm__label">Имя</div>
-        {createField<GetFormKeys<ProfileType>>('Изменить', 'fullName', Input, [])}
+        {createField<GetFormKeys<ProfileType>>('Изменить', 'fullName', InputCustom, [])}
       </div>
       <div className='ProfileInfoForm__field'>
         <div className="ProfileInfoForm__label">Ищу работу</div>
-        {createField<GetFormKeys<ProfileType>>("", 'lookingForAJob', Input, [], {type: 'checkbox'})}
+        {createField<GetFormKeys<ProfileType>>("", 'lookingForAJob', InputCustom, [], {type: 'checkbox'})}
       </div>
       <div className='ProfileInfoForm__field'>
         <div className="ProfileInfoForm__label">Мои навыки</div>
@@ -38,7 +38,7 @@ const ProfileInfoForm: FC<InjectedFormProps<ProfileType, PropsType> & PropsType>
         return <div key={key} className='ProfileInfoForm__field'>
           <div className="ProfileInfoForm__label">{key}</div>
             {/*todo:create some solution for embedded objects*/}
-          {createField(key, `contacts.${key}`, Input, [])}
+          {createField(key, `contacts.${key}`, InputCustom, [])}
         </div>
       })}
       {error && <div className="FormSummaryError">

@@ -1,0 +1,27 @@
+.PostItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  &__ava {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &__message {
+    display: inline-block;
+    margin-right: 15px;
+  }
+
+  &__like {
+    color: #61dbfb;
+  }
+}
