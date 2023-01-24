@@ -1,7 +1,6 @@
 import React, {FC, useEffect, useState} from "react";
 import {Preloader} from "../../../common/Preloader/Preloader";
 import {ProfileAva} from "./components/ProfileAva";
-import {ProfileStatusWithHooks} from "./components/ProfileStatusWithHooks";
 import {ProfileInfo} from "./components/ProfileInfo";
 import ProfileInfoForm from "./components/ProfileInfoForm";
 import {ProfileType} from "../../../../types/types";
@@ -9,6 +8,7 @@ import {useDispatch} from "react-redux";
 import {saveProfile} from "../../../../redux/profileReducer";
 import {Button, Space, Typography} from "antd";
 import {StyledProfileDashboard, StyledProfileDashboardAvatar} from "./styled";
+import { ProfileStatus } from "./components/ProfileStatus";
 
 const {Title} = Typography
 
@@ -55,7 +55,7 @@ export const ProfileDashboard: FC<PropsType> = (
                 <Space direction='vertical' size={'large'}>
                     <Space direction='vertical'>
                         <Title children={profile.fullName}/>
-                        <ProfileStatusWithHooks
+                        <ProfileStatus
                             status={status}
                             isOwner={isOwner}
                         />

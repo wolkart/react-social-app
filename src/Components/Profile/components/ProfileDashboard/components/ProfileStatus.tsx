@@ -8,7 +8,7 @@ type PropsType = {
   isOwner: boolean
 }
 
-export const ProfileStatusWithHooks: FC<PropsType> = props => {
+export const ProfileStatus: FC<PropsType> = props => {
   const [editMode, setEditMode] = useState(false)
   const [status, setStatus] = useState(props.status)
   const dispatch = useDispatch()

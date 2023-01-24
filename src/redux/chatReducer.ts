@@ -1,4 +1,4 @@
-import {ActionsType} from "./store";
+import { ActionsType } from "./store";
 
 const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
 const SEND_MESSAGE = 'ADD-SEND_MESSAGE'
@@ -35,7 +35,27 @@ const initialState: InitialStateType = {
       id: 3,
       name: 'Fiona',
       photo: 'https://99px.ru/sstorage/56/2019/11/image_561311190659479643839.jpg'
-    }
+    },
+    {
+      id: 4,
+      name: 'Fiona',
+      photo: 'https://99px.ru/sstorage/56/2019/11/image_561311190659479643839.jpg'
+    },
+    {
+      id: 5,
+      name: 'Fiona',
+      photo: 'https://99px.ru/sstorage/56/2019/11/image_561311190659479643839.jpg'
+    },
+    {
+      id: 6,
+      name: 'Fiona',
+      photo: 'https://99px.ru/sstorage/56/2019/11/image_561311190659479643839.jpg'
+    },
+    {
+      id: 7,
+      name: 'Fiona',
+      photo: 'https://99px.ru/sstorage/56/2019/11/image_561311190659479643839.jpg'
+    },
   ],
   messages: [
     {id: 1, message: 'Hi'},
@@ -44,7 +64,7 @@ const initialState: InitialStateType = {
   ]
 }
 
-const dialogsReducer = (state = initialState, action: DialogsActionType): InitialStateType => {
+const chatReducer = (state = initialState, action: DialogsActionType): InitialStateType => {
   switch (action.type) {
     case 'SEND_MESSAGE': {
       return {
@@ -69,4 +89,4 @@ export const actions = {
   sendMessage: (payload: string) => ({type: 'SEND_MESSAGE', payload} as const)
 }
 
-export default dialogsReducer
+export default chatReducer

@@ -1,5 +1,5 @@
 import {createStore, combineReducers, applyMiddleware, compose, Action} from "redux";
-import dialogsReducer from "./dialogsReducer";
+import chatReducer from "./chatReducer";
 import profileReducer from "./profileReducer";
 import usersReducer from "./usersReducer";
 import authReducer from "./authReducer";
@@ -8,7 +8,7 @@ import {reducer as formReducer} from "redux-form";
 import appReducer from "./appReducer";
 
 const rootReducer = combineReducers({
-    dialogsPage: dialogsReducer,
+    chat: chatReducer,
     profilePage: profileReducer,
     usersPage: usersReducer,
     auth: authReducer,

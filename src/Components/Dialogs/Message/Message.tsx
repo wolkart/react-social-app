@@ -1,5 +1,4 @@
 import React, {FC} from 'react'
-import '../Dialogs.scss'
 
 type PropsType = {
     message: string
