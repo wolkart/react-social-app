@@ -32,11 +32,11 @@ export const App = () => {
             <Content style={
                 {display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '1280px', margin: '0 auto', minHeight: '100vh'}
             } >
-                <Layout style={{padding: '24px 0', background: colorBgContainer, height: '100%'}}>
+                <Layout style={{display: 'flex', columnGap: '20px', padding: '20px 15px', background: colorBgContainer, height: '100%'}}>
                     <Sider style={{background: colorBgContainer}} width={200}>
                         <NavBar/>
                     </Sider>
-                    <Content style={{padding: '0 24px', minHeight: 280}}>
+                    <Content style={{minHeight: 280}}>
                         <AppRouter/>
                     </Content>
                 </Layout>

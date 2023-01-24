@@ -1,13 +1,13 @@
 import React, {FC} from 'react'
 import './NavBar.scss'
 import {Nav} from "./Nav/Nav";
+import {Layout} from "antd";
+import {StyledNavBar} from "./styled";
 
 export const NavBar: FC = () => {
-  return (
-    <div className="NavBar">
-      <div className="NavBar__inner">
-        <Nav/>
-      </div>
-    </div>
-  )
+    return (
+        <StyledNavBar>
+            <Nav/>
+        </StyledNavBar>
+    )
 }

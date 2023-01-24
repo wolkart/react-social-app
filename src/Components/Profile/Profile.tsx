@@ -8,7 +8,7 @@ import {useDispatch} from "react-redux";
 import {getUserProfile, getUserStatus} from '../../redux/profileReducer';
 
 const Profile: FC = () => {
-    const {profile, status} = useAppSelector(state => state.profilePage)
+    const {profile, status, posts} = useAppSelector(state => state.profilePage)
     const {userId: ownerId, isAuth} = useAppSelector(state => state.auth)
     const {userId: otherId} = useParams<{ userId: string | undefined }>()
     const dispatch = useDispatch()
@@ -46,7 +46,10 @@ const Profile: FC = () => {
                 status={status}
                 isOwner={!otherId}
             />
-            <ProfilePosts/>
+            <ProfilePosts
+                posts={posts}
+                photo={profile && profile.photos.small}
+            />
         </div>
     )
 }

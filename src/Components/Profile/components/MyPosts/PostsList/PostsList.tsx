@@ -5,13 +5,14 @@ import {PostType} from "../../../../../types/types";
 
 type PropsType = {
     posts: PostType[]
+    photo: string | null
 }
 
-export const PostsList: FC<PropsType> = ({posts}) => {
+export const PostsList: FC<PropsType> = ({posts, photo}) => {
     return (
         <div className="PostsList">
             {
-                posts.map((post, i) => <PostItem key={i} message={post.message} like={post.like}/>)
+                posts.map((post, i) => <PostItem key={i} photo={photo} message={post.message} like={post.like}/>)
             }
         </div>
     )
