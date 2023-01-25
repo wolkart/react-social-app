@@ -2,7 +2,6 @@ import React, {FC} from "react";
 import {createField, GetFormKeys, InputCustom, Textarea} from "../../../../common/Forms/FormsControls";
 import {reduxForm} from "redux-form";
 import './ProfileInfoForm.scss'
-import '../../../../common/Forms/FormControls.scss'
 import {ProfileType} from "../../../../../types/types";
 import {InjectedFormProps} from "redux-form/lib/reduxForm";
 

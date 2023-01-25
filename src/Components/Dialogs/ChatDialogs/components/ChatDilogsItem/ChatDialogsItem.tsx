@@ -5,7 +5,6 @@ interface PropsType {
   photo: string
   name: string
   message: string
-  id: number
 }
 
 export const ChatDialogsItem: FC<PropsType> = (
@@ -13,13 +12,12 @@ export const ChatDialogsItem: FC<PropsType> = (
     photo,
     name,
     message,
-    id
   }
 ) => {
   return (
     <StyledChatDialogsItem>
       <StyledStyledChatDialogsUser>
-        <img src={photo} alt=""/>
+        <img src={photo} alt={name}/>
         {name}
       </StyledStyledChatDialogsUser>
 

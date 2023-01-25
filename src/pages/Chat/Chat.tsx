@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { actions } from '../../redux/chatReducer';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { useDispatch } from 'react-redux';
@@ -11,10 +11,18 @@ export type DialogNewMessageForm = {
   newMessage: string
 }
 
+const ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+
 const Chat: FC = () => {
   const { dialogs, messages } = useAppSelector(state => state.chat)
   const { isAuth } = useAppSelector(state => state.auth)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    ws.addEventListener('message', e => {
+      console.log(JSON.parse(e.data))
+    })
+  }, [])
 
   const addNewMessage = (values: DialogNewMessageForm) => {
     dispatch(actions.sendMessage(values.newMessage))
