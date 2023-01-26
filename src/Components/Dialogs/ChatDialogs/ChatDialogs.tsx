@@ -1,25 +1,33 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { StyledChatDialogs, StyledChatDialogsInner } from './styled';
 import { ChatDialogsItem } from './components/ChatDilogsItem/ChatDialogsItem';
 import { Space } from 'antd';
-import { DialogType, MessageType } from '../../../redux/chatReducer';
+import { MessageType } from '../../../pages/Chat/Chat';
 
-interface PropsType {
-  dialogs: DialogType[]
+interface PropType {
   messages: MessageType[]
 }
 
-export const ChatDialogs: FC<PropsType> = ({ dialogs }) => {
+export const ChatDialogs: FC<PropType> = ({messages}) => {
+  const dialogsContainer = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (dialogsContainer.current) {
+      dialogsContainer.current.scrollTop = dialogsContainer.current.scrollHeight
+    }
+  }, [messages])
+
   return (
     <StyledChatDialogs>
-      <StyledChatDialogsInner>
+      <StyledChatDialogsInner ref={dialogsContainer}>
         <Space direction="vertical" size="large">
-          {dialogs.map((dialog) =>
+          {messages.map((message, index) =>
             <ChatDialogsItem
-              key={dialog.id}
-              name={dialog.name}
-              photo={dialog.photo}
-              message={'Example text message Example text message Example text message Example text message Example text message Example text message Example text message'}
+              key={index}
+              userName={message.userName}
+              photo={message.photo}
+              message={message.message}
+              userId={message.userId}
             />
           )}
         </Space>

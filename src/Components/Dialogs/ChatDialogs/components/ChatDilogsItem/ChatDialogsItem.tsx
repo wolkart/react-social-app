@@ -1,27 +1,35 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { StyledChatDialogsItem, StyledStyledChatDialogsMessage, StyledStyledChatDialogsUser } from './styled';
+import userStub from '../../../../../assets/images/ava-stub.jpg';
+import { NavLink } from 'react-router-dom';
+import { MessageType } from '../../../../../pages/Chat/Chat';
+import { useAppSelector } from '../../../../../hooks/useAppSelector';
 
-interface PropsType {
-  photo: string
-  name: string
-  message: string
-}
-
-export const ChatDialogsItem: FC<PropsType> = (
+export const ChatDialogsItem: FC<MessageType> = (
   {
     photo,
-    name,
+    userId,
     message,
+    userName
   }
 ) => {
+  const [owner, setOwner] = useState(false)
+  const {userId: ownerId} = useAppSelector(state => state.auth)
+
+  useEffect(() => {
+    setOwner(ownerId === userId)
+  }, [userId])
+
   return (
-    <StyledChatDialogsItem>
+    <StyledChatDialogsItem owner={owner}>
       <StyledStyledChatDialogsUser>
-        <img src={photo} alt={name}/>
-        {name}
+        <NavLink to={`profile/${!owner ? userId : ''}`}>
+          <img src={photo || userStub} alt={userName}/>
+          {userName}
+        </NavLink>
       </StyledStyledChatDialogsUser>
 
-      <StyledStyledChatDialogsMessage>
+      <StyledStyledChatDialogsMessage owner={owner}>
         {message}
       </StyledStyledChatDialogsMessage>
     </StyledChatDialogsItem>

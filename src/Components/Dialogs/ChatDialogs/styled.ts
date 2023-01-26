@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledChatDialogs = styled.div`
-  height: 450px;
+  height: calc(100vh - 220px);
   border-radius: 20px;
   background-color: #f5f5f5;
   padding: 15px 25px;

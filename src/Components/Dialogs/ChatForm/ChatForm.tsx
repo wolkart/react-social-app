@@ -1,28 +1,39 @@
-import React, { FC } from 'react';
-import { InjectedFormProps } from 'redux-form/lib/reduxForm';
-import { DialogNewMessageForm } from '../../../pages/Chat/Chat';
-import { createField, GetFormKeys, Textarea } from '../../common/Forms/FormsControls';
-import { reduxForm } from 'redux-form';
+import React, { ChangeEvent, FC, useState } from 'react';
 import { StyledChatForm } from './styled';
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
+import { SendOutlined } from '@ant-design/icons';
 
-const ChatForm: FC<InjectedFormProps<DialogNewMessageForm>> = ({ handleSubmit }) => {
+const { TextArea } = Input;
+
+interface PropsType {
+  addNewMessage: (newMessage: string) => void
+}
+
+export const ChatForm: FC<PropsType> = ({ addNewMessage }) => {
+  const [message, setMessage] = useState('')
+
+  const sendMessage = () => {
+    addNewMessage(message)
+    setMessage('')
+  }
+
   return (
-    <StyledChatForm onSubmit={handleSubmit}>
-        {createField<GetFormKeys<DialogNewMessageForm>>(
-          'Написать сообщение...',
-          'newMessage',
-          Textarea
-        )}
-        <Button
-          type="primary"
-          size='large'
-          ghost
-        >
-          Отправить
-        </Button>
+    <StyledChatForm>
+      <TextArea
+        placeholder="Написать сообщение..."
+        autoSize={{ minRows: 2, maxRows: 6 }}
+        value={message}
+        onChange={e => setMessage(e.target.value)}
+      />
+      <Button
+        type="primary"
+        size="large"
+        icon={<SendOutlined/>}
+        style={{height: '54px'}}
+        onClick={sendMessage}
+      >
+        Отправить
+      </Button>
     </StyledChatForm>
   )
 }
-
-export const ChatFormRedux = reduxForm<DialogNewMessageForm>({ form: 'dialogAddMessageForm' })(ChatForm)

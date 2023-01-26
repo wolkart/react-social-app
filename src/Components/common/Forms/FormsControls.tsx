@@ -10,7 +10,7 @@ type FormControlPropsType = {
 
 export type GetFormKeys<T> = Extract<keyof T, string>
 
-const FormControl: FC<FormControlPropsType> = ({ meta: { touched, error }, children }) => {
+export const FormControl: FC<FormControlPropsType> = ({ meta: { touched, error }, children }) => {
   const hasError = touched && error
 
   return (

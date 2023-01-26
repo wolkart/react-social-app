@@ -1,41 +1,44 @@
-import React, { FC, useEffect } from 'react'
-import { actions } from '../../redux/chatReducer';
+import React, { FC, useEffect, useState } from 'react'
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { StyledChatWrapper } from './styled';
 import { ChatDialogs } from '../../Components/Dialogs/ChatDialogs/ChatDialogs';
-import { ChatFormRedux } from '../../Components/Dialogs/ChatForm/ChatForm';
+import { ChatForm } from '../../Components/Dialogs/ChatForm/ChatForm';
 
-export type DialogNewMessageForm = {
-  newMessage: string
+export interface MessageType {
+  userId: number
+  message: string
+  userName: string
+  photo: string | null
 }
 
-const ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-
 const Chat: FC = () => {
-  const { dialogs, messages } = useAppSelector(state => state.chat)
-  const { isAuth } = useAppSelector(state => state.auth)
-  const dispatch = useDispatch()
+  const messagesWS = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+  const [messages, setMessages] = useState<MessageType[]>([])
+
+  const { isAuth, userId } = useAppSelector(state => state.auth)
 
   useEffect(() => {
-    ws.addEventListener('message', e => {
-      console.log(JSON.parse(e.data))
+    messagesWS.addEventListener('message', e => {
+      const newMessages = JSON.parse(e.data)
+      setMessages(prevState => [...prevState, ...newMessages])
     })
   }, [])
 
-  const addNewMessage = (values: DialogNewMessageForm) => {
-    dispatch(actions.sendMessage(values.newMessage))
+  const addNewMessage = (newMessage: string) => {
+    messagesWS.send(newMessage)
   }
 
   if (!isAuth) return <Redirect to="/login"/>
 
   return (
     <StyledChatWrapper>
-      <ChatDialogs dialogs={dialogs} messages={messages}/>
+      <ChatDialogs
+        messages={messages}
+      />
 
-      <ChatFormRedux
-        onSubmit={addNewMessage}
+      <ChatForm
+        addNewMessage={addNewMessage}
       />
     </StyledChatWrapper>
   )

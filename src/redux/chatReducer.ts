@@ -56,6 +56,16 @@ const initialState: InitialStateType = {
       name: 'Fiona',
       photo: 'https://99px.ru/sstorage/56/2019/11/image_561311190659479643839.jpg'
     },
+    {
+      id: 8,
+      name: 'Fiona',
+      photo: 'https://99px.ru/sstorage/56/2019/11/image_561311190659479643839.jpg'
+    },
+    {
+      id: 9,
+      name: 'Fiona',
+      photo: 'https://99px.ru/sstorage/56/2019/11/image_561311190659479643839.jpg'
+    },
   ],
   messages: [
     {id: 1, message: 'Hi'},

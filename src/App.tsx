@@ -27,7 +27,7 @@ export const App = () => {
   if (!initialized) return <Preloader/>
 
   return (
-    <Layout>
+    <Layout style={{minHeight: '100vh'}}>
       <AppHeader/>
       <Content style={
         {
@@ -36,7 +36,7 @@ export const App = () => {
           width: '100%',
           maxWidth: '1280px',
           margin: '0 auto',
-          minHeight: '100vh'
+          flex: '1 1 auto',
         }
       }>
         <Layout style={{
